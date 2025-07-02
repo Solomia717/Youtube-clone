@@ -60,7 +60,7 @@ export const AnalyticsOverview = (): JSX.Element => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
-    <div className="w-full h-full bg-[#282828] overflow-auto">
+    <div className="w-full min-h-[calc(100vh-64px)] bg-[#282828] overflow-y-auto">
       {/* Header */}
       <div className="w-full flex justify-between items-center p-4">
         <h1 className="font-semibold text-white text-[23.2px] tracking-[0] leading-8">

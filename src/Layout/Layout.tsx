@@ -4,13 +4,11 @@ import { Sidebar } from "./sections/Sidebar/Sidebar";
 
 export const Layout = (): JSX.Element => {
   return (
-    <div className="w-full bg-[#282828]">
-      <div className="flex flex-col h-full">
-        <Header />
-        <div className="flex flex-1">
-          <Sidebar />
-          <AnalyticsOverview />
-        </div>
+    <div className="w-full bg-[#282828] min-h-screen">
+      <Header />
+      <Sidebar />
+      <div className="ml-64 mt-16">
+        <AnalyticsOverview />
       </div>
     </div>
   );
