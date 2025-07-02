@@ -112,12 +112,28 @@
 
 .rdp-caption {
   padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.rdp-head_cell {
-  font-weight: normal;
-  color: white;
-  text-transform: uppercase;
+.rdp-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.rdp-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+thead {
+  display: none !important;
+}
+
+.rdp-table thead {
+  display: none !important;
 }
 
 .rdp-day_selected,

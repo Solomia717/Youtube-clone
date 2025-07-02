@@ -34,7 +34,7 @@ export function DatePicker({
                         <div className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4">
                             {dateRangeText}
                         </div>
-                        <div className="text-white text-[15px] tracking-[0] leading-6 flex items-center">
+                        <div className="text-white text-[15px] tracking-[0] leading-6 flex items-center justify-between">
                             {label}
                             <img
                                 className="ml-2 w-[13px] h-[7px]"
@@ -46,6 +46,15 @@ export function DatePicker({
                 </div>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
+                <div className="fixed top-[48px] left-[40px] flex gap-[15.8px] font-bold">
+                    <span>Su</span>
+                    <span>Mo</span>
+                    <span>Tu</span>
+                    <span>We</span>
+                    <span>Th</span>
+                    <span>Fr</span>
+                    <span>Sa</span>
+                </div>
                 <Calendar
                     mode="single"
                     selected={date}

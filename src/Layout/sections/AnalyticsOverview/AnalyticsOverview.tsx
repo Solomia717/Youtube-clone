@@ -125,7 +125,7 @@ export const AnalyticsOverview = (): JSX.Element => {
           {/* Left Column */}
           <div className="flex-1 p-3">
             {/* Performance Summary */}
-            <div className="mb-6 text-center">
+            <div className="mb-6 text-center font-roboto">
               <h2 className="font-bold text-white text-[28px] tracking-[-0.34px] leading-10 mt-5 mb-2">
                 Keep it up! Your channel got 647% more views than usual in
                 <br />
@@ -147,7 +147,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                     <div
                       key={i}
                       onClick={() => setActiveTabIndex(i)}
-                      className={`p-4 text-center cursor-pointer transition-colors duration-200
+                      className={`p-4 font-roboto text-center cursor-pointer transition-colors duration-200
                     ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
                     ${i < statTabs.length - 1 ? "border-r border-[#ffffff1a]" : ""}`}
                     >
