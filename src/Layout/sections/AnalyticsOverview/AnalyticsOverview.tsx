@@ -75,8 +75,8 @@ export const AnalyticsOverview = (): JSX.Element => {
       </div>
 
       {/* Navigation Tabs */}
-      <div className="w-full h-[72px] bg-[#282828] border-b border-[#ffffff1a]">
-        <div className="relative w-full h-[71px] px-6">
+      <div className="w-full bg-[#282828] border-b border-[#ffffff1a]">
+        <div className="relative w-full px-6">
           <div className="flex items-center h-12 mt-[23px]">
             {/* Tabs */}
             <div className="flex space-x-10">
@@ -107,7 +107,7 @@ export const AnalyticsOverview = (): JSX.Element => {
             {/* Date Select */}
             <div className="ml-auto flex items-center">
               <div className="w-[230px] h-14 bg-[#ffffff01]">
-                <div className="flex flex-col h-full justify-center">
+                <div className="flex flex-col h-full justify-center cursor-pointer">
                   <div className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4">
                     Jun 4 – Jul 1, 2025
                   </div>
@@ -116,7 +116,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                     <img
                       className="ml-2 w-[13px] h-[7px]"
                       alt="Dropdown arrow"
-                      src="/group-25.png"
+                      src="./icon-dropdown.svg"
                     />
                   </div>
                 </div>
@@ -283,6 +283,23 @@ export const AnalyticsOverview = (): JSX.Element => {
           </Card>
         </div>
       </div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
+      <div>AAAA</div>
     </div>
   );
 };
