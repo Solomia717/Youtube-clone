@@ -51,8 +51,8 @@ const data: ChartData<'line'> = {
             label: 'Views',
             data: dataValues,
             fill: true,
-            borderColor: '#00ffff',
-            backgroundColor: 'rgba(0, 255, 255, 0.1)',
+            borderColor: '#00BFFF',
+            backgroundColor: 'rgba(0, 191, 255, 0.1)',
             tension: 0.4,
             pointRadius: 0,
         }
@@ -124,7 +124,7 @@ const options: ChartOptions<'line'> = {
 
 const StatusLineChart: React.FC = () => {
     return (
-        <div style={{ height: '174px', padding: '1rem' }}>
+        <div style={{ height: '174px', padding: '1rem 0' }}>
             <Line data={data} options={options} />
         </div>
     );

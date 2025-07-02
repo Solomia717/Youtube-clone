@@ -1,9 +1,13 @@
-import { SearchIcon } from "lucide-react";
+import { SearchIcon, Settings } from "lucide-react";
 import { Input } from "../../../components/ui/input";
 import { Button } from "../../../components/ui/button";
 import { Avatar } from "../../../components/ui/avatar";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = (): JSX.Element => {
+  const location = useLocation();
+  const isAdminPage = location.pathname === "/admin";
+
   return (
     <div className="w-full h-16 bg-[#282828] shadow-[0_2px_4px_0_rgba(0,0,0,0.3)] z-20 fixed top-0 left-0">
       <header className="w-full h-16 flex items-center justify-between px-4">
@@ -21,7 +25,9 @@ export const Header = (): JSX.Element => {
           </div>
 
           {/* Logo */}
-          <div className="h-6 w-[97px] bg-[url(./logo.svg)] bg-[100%_100%]" />
+          <Link to="/">
+            <div className="h-6 w-[97px] bg-[url(./logo.svg)] bg-[100%_100%] cursor-pointer" />
+          </Link>
         </div>
 
         {/* SearchIcon bar */}
@@ -39,6 +45,15 @@ export const Header = (): JSX.Element => {
 
         {/* Right section with actions and profile */}
         <div className="flex items-center space-x-4">
+          {/* Admin Link */}
+          <Link to={isAdminPage ? "/" : "/admin"}>
+            <div className="w-10 h-10 rounded-[20px] flex items-center justify-center hover:bg-[#3f3f3f] cursor-pointer">
+              <div className="w-6 h-6 flex items-center justify-center">
+                <Settings className="w-5 h-5 text-white" />
+              </div>
+            </div>
+          </Link>
+
           {/* Help */}
           <div className="w-10 h-10 rounded-[20px] flex items-center justify-center">
             <div className="w-6 h-6 flex items-center justify-center">
