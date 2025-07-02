@@ -31,8 +31,8 @@ export const Header = (): JSX.Element => {
               <SearchIcon className="h-6 w-6 text-[#aaaaaa]" />
             </div>
             <Input
-              className="w-full h-10 bg-[#161616] rounded-[20px] pl-12 text-[15px] text-[#aaaaaa] font-['Roboto',Helvetica] border-none"
-              placeholder="SearchIcon across your channel"
+              className="w-full h-10 bg-[#161616] rounded-[20px] pl-12 text-[15px] text-[#aaaaaa] font-roboto border-none placeholder-white placeholder-opacity-100"
+              placeholder="Search across your channel"
             />
           </div>
         </div>
@@ -70,7 +70,7 @@ export const Header = (): JSX.Element => {
                 />
               </svg>
             </div>
-            <span className="text-white group-hover:text-black text-sm font-medium font-['Roboto',Helvetica]">
+            <span className="text-white group-hover:text-black text-sm font-roboto">
               Create
             </span>
           </Button>

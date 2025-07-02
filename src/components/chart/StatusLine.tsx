@@ -124,7 +124,7 @@ const options: ChartOptions<'line'> = {
 
 const StatusLineChart: React.FC = () => {
     return (
-        <div style={{ height: '250px', padding: '1rem' }}>
+        <div style={{ height: '174px', padding: '1rem' }}>
             <Line data={data} options={options} />
         </div>
     );
