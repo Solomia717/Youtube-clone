@@ -60,22 +60,25 @@ export const AnalyticsOverview = (): JSX.Element => {
   const [activeTabIndex, setActiveTabIndex] = useState(0);
 
   return (
-    <div className="w-full min-h-[calc(100vh-64px)] bg-[#282828] overflow-y-auto">
-      {/* Header */}
-      <div className="w-full flex justify-between items-center p-4">
-        <h1 className="font-semibold text-white text-[23.2px] tracking-[0] leading-8">
-          Channel analytics
-        </h1>
-        <Button
-          variant="ghost"
-          className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
-        >
-          Advanced mode
-        </Button>
+    <div className="w-full min-h-[calc(100vh-64px)] bg-[#282828] flex flex-col">
+      {/* Scrollable container for everything except navigation tabs */}
+      <div className="overflow-y-auto">
+        {/* Header */}
+        <div className="w-full flex justify-between items-center p-4">
+          <h1 className="font-semibold text-white text-[23.2px] tracking-[0] leading-8">
+            Channel analytics
+          </h1>
+          <Button
+            variant="ghost"
+            className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+          >
+            Advanced mode
+          </Button>
+        </div>
       </div>
 
-      {/* Navigation Tabs */}
-      <div className="w-full bg-[#282828] border-b border-[#ffffff1a]">
+      {/* Navigation Tabs - Sticky */}
+      <div className="w-full bg-[#282828] border-b border-[#ffffff1a] sticky top-16 z-10">
         <div className="relative w-full px-6">
           <div className="flex items-center h-12 mt-[23px]">
             {/* Tabs */}
@@ -126,180 +129,167 @@ export const AnalyticsOverview = (): JSX.Element => {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex flex-row">
-        {/* Left Column */}
-        <div className="flex-1 p-3">
-          {/* Performance Summary */}
-          <div className="mb-6 text-center">
-            <h2 className="font-bold text-white text-[28px] tracking-[-0.34px] leading-10 mt-5 mb-2">
-              Keep it up! Your channel got 647% more views than usual in
-              <br />
-              the last 28 days.
-            </h2>
-            <p className="text-[#aaaaaa] text-[15px] tracking-[0] leading-6">
-              Your channel got 266,627 views, more than the 5,600–83,300 it
-              usually gets in 28 days
-            </p>
-          </div>
+      {/* Scrollable content container */}
+      <div className="overflow-y-auto flex-1">
 
-          {/* Metrics Card */}
-          <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
-            {/* Chart Header */}
-            <div className="grid grid-cols-3 bg-[#212121]">
-              {statTabs.map((tab, i) => {
-                const isActive = i === activeTabIndex;
-                return (
-                  <div
-                    key={i}
-                    onClick={() => setActiveTabIndex(i)}
-                    className={`p-4 text-center cursor-pointer transition-colors duration-200 
-                    ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"} 
+        {/* Main Content */}
+        <div className="flex flex-row">
+          {/* Left Column */}
+          <div className="flex-1 p-3">
+            {/* Performance Summary */}
+            <div className="mb-6 text-center">
+              <h2 className="font-bold text-white text-[28px] tracking-[-0.34px] leading-10 mt-5 mb-2">
+                Keep it up! Your channel got 647% more views than usual in
+                <br />
+                the last 28 days.
+              </h2>
+              <p className="text-[#aaaaaa] text-[15px] tracking-[0] leading-6">
+                Your channel got 266,627 views, more than the 5,600–83,300 it
+                usually gets in 28 days
+              </p>
+            </div>
+
+            {/* Metrics Card */}
+            <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+              {/* Chart Header */}
+              <div className="grid grid-cols-3 bg-[#212121]">
+                {statTabs.map((tab, i) => {
+                  const isActive = i === activeTabIndex;
+                  return (
+                    <div
+                      key={i}
+                      onClick={() => setActiveTabIndex(i)}
+                      className={`p-4 text-center cursor-pointer transition-colors duration-200
+                    ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
                     ${i < statTabs.length - 1 ? "border-r border-[#ffffff1a]" : ""}`}
-                  >
-                    <p className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mb-2">
-                      {tab.label}
-                    </p>
-                    <div className="flex items-center justify-center">
-                      <span className="text-white text-2xl tracking-[-0.29px] leading-8">
-                        {tab.value}
-                      </span>
-                      <img
-                        className="w-[17px] h-[17px] ml-1"
-                        src={tab.icon}
-                        alt="indicator"
-                      />
+                    >
+                      <p className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mb-2">
+                        {tab.label}
+                      </p>
+                      <div className="flex items-center justify-center">
+                        <span className="text-white text-2xl tracking-[-0.29px] leading-8">
+                          {tab.value}
+                        </span>
+                        <img
+                          className="w-[17px] h-[17px] ml-1"
+                          src={tab.icon}
+                          alt="indicator"
+                        />
+                      </div>
+                      <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-2">
+                        {tab.note}
+                      </p>
                     </div>
-                    <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-2">
-                      {tab.note}
-                    </p>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Graph */}
-            <div className="mt-2">
-              <StatusLineChart />
-            </div>
-
-            <div className="p-4">
-              <Button
-                variant="ghost"
-                className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
-              >
-                See more
-              </Button>
-            </div>
-          </Card>
-        </div>
-
-        {/* Right Column */}
-        <div className="w-[346px] p-4">
-          {/* Realtime Card */}
-          <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
-            <CardHeader className="pb-0">
-              <CardTitle className="text-white text-lg">Realtime</CardTitle>
-              <div className="flex items-center mt-1">
-                <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
-                <span className="text-[#aaaaaa] text-[13px]">
-                  Updating live
-                </span>
+                  );
+                })}
               </div>
-            </CardHeader>
-            <Separator className="my-4 bg-[#ffffff1a]" />
-            <CardContent className="space-y-6">
-              <div>
-                <h3 className="text-white text-lg font-medium">978</h3>
-                <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
+
+              {/* Graph */}
+              <div className="mt-2">
+                <StatusLineChart />
+              </div>
+
+              <div className="p-4">
                 <Button
                   variant="ghost"
                   className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
                 >
-                  See live count
-                </Button>
-              </div>
-
-              <Separator className="bg-[#ffffff1a]" />
-
-              <div>
-                <h3 className="text-white text-lg font-medium">14,512</h3>
-                <p className="text-[#aaaaaa] text-[13px] mb-2">
-                  Views · Last 48 hours
-                </p>
-
-                {/* Mini chart */}
-                <div className="text-white w-full">
-                  <MiniBarChart data={mockData} />
-                  <div className="flex justify-between text-xs text-gray-400 mb-1 px-1">
-                    <span>-48h</span>
-                    <span>Now</span>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-[#aaaaaa] text-xs">Top content</span>
-                  <span className="text-[#aaaaaa] text-xs">Views</span>
-                </div>
-
-                {realtimeTopContent.map((item, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center justify-between mb-4"
-                  >
-                    <div className="flex items-center">
-                      <div
-                        className="w-14 h-8 rounded bg-cover bg-center mr-4 relative"
-                        style={{ backgroundImage: `url(${item.thumbnail})` }}
-                      >
-                        <div className="absolute right-0 bottom-0 w-4 h-4 bg-[#282828] rounded-sm flex items-center justify-center">
-                          <img
-                            className="w-1.5 h-[9px]"
-                            alt="Play icon"
-                            src={`./content-icon.svg`}
-                          />
-                        </div>
-                      </div>
-                      <span className="text-white text-[13px]">
-                        {item.title.length > 21 ? `${item.title.slice(0, 21)}...` : item.title}
-                      </span>
-                    </div>
-                    <span className="text-white text-[13px] text-right">
-                      {item.views}
-                    </span>
-                  </div>
-                ))}
-
-                <Button
-                  variant="ghost"
-                  className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 mt-2"
-                >
                   See more
                 </Button>
               </div>
-            </CardContent>
-          </Card>
+            </Card>
+          </div>
+
+          {/* Right Column */}
+          <div className="w-[346px] p-4">
+            {/* Realtime Card */}
+            <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+              <CardHeader className="pb-0">
+                <CardTitle className="text-white text-lg">Realtime</CardTitle>
+                <div className="flex items-center mt-1">
+                  <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
+                  <span className="text-[#aaaaaa] text-[13px]">
+                    Updating live
+                  </span>
+                </div>
+              </CardHeader>
+              <Separator className="my-4 bg-[#ffffff1a]" />
+              <CardContent className="space-y-6">
+                <div>
+                  <h3 className="text-white text-lg font-medium">978</h3>
+                  <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
+                  <Button
+                    variant="ghost"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+                  >
+                    See live count
+                  </Button>
+                </div>
+
+                <Separator className="bg-[#ffffff1a]" />
+
+                <div>
+                  <h3 className="text-white text-lg font-medium">14,512</h3>
+                  <p className="text-[#aaaaaa] text-[13px] mb-2">
+                    Views · Last 48 hours
+                  </p>
+
+                  {/* Mini chart */}
+                  <div className="text-white w-full">
+                    <MiniBarChart data={mockData} />
+                    <div className="flex justify-between text-xs text-gray-400 mb-1 px-1">
+                      <span>-48h</span>
+                      <span>Now</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-[#aaaaaa] text-xs">Top content</span>
+                    <span className="text-[#aaaaaa] text-xs">Views</span>
+                  </div>
+
+                  {realtimeTopContent.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center justify-between mb-4"
+                    >
+                      <div className="flex items-center">
+                        <div
+                          className="w-14 h-8 rounded bg-cover bg-center mr-4 relative"
+                          style={{ backgroundImage: `url(${item.thumbnail})` }}
+                        >
+                          <div className="absolute right-0 bottom-0 w-4 h-4 bg-[#282828] rounded-sm flex items-center justify-center">
+                            <img
+                              className="w-1.5 h-[9px]"
+                              alt="Play icon"
+                              src={`./content-icon.svg`}
+                            />
+                          </div>
+                        </div>
+                        <span className="text-white text-[13px]">
+                          {item.title.length > 21 ? `${item.title.slice(0, 21)}...` : item.title}
+                        </span>
+                      </div>
+                      <span className="text-white text-[13px] text-right">
+                        {item.views}
+                      </span>
+                    </div>
+                  ))}
+
+                  <Button
+                    variant="ghost"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 mt-2"
+                  >
+                    See more
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
-      <div>AAAA</div>
     </div>
   );
 };
