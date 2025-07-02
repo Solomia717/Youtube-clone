@@ -6,8 +6,8 @@ import { Avatar } from "../../../components/ui/avatar";
 
 export const Header = (): JSX.Element => {
   return (
-    <div className="w-full h-16 bg-[#282828] shadow-[0_2px_4px_0_rgba(0,0,0,0.3)] z-10">
-      <header className="relative w-full h-16 flex items-center justify-between px-4">
+    <div className="w-full h-16 bg-[#282828] shadow-[0_2px_4px_0_rgba(0,0,0,0.3)] z-20 fixed top-0 left-0">
+      <header className="w-full h-16 flex items-center justify-between px-4">
         {/* Left section with menu and logo */}
         <div className="flex items-center">
           {/* Menu button */}

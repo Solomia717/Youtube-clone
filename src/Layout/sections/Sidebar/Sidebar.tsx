@@ -33,7 +33,7 @@ export const Sidebar = (): JSX.Element => {
   const [selectedMenu, setSelectedMenu] = useState(2)
 
   return (
-    <div className="w-64 h-[665px] bg-[#282828] border-r border-[#ffffff1a]">
+    <div className="w-64 h-[calc(100vh-64px)] bg-[#282828] border-r border-[#ffffff1a] fixed top-16 left-0 overflow-y-auto">
       {/* Profile section */}
       <div className="w-full h-52 flex flex-col items-center">
         <div className="w-28 h-28 mt-6 rounded-[56px] bg-[url(./profile-avatar.jpg)] bg-cover bg-[50%_50%]" />
