@@ -9,6 +9,7 @@ import {
 import { Separator } from "../../../components/ui/separator";
 import StatusLineChart from "../../../components/chart/StatusLine";
 import MiniBarChart from "../../../components/chart/MiniBar";
+import { DatePicker } from "../../../components/ui/date-picker";
 
 // Data for realtime top content
 const realtimeTopContent = [
@@ -58,6 +59,7 @@ export const AnalyticsOverview = (): JSX.Element => {
   const tabs = ["Overview", "Content", "Audience", "Trends"];
   const [activeTab, setActiveTab] = useState("Overview");
   const [activeTabIndex, setActiveTabIndex] = useState(0);
+  const [date, setDate] = useState<Date>(new Date());
 
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-[#282828] flex flex-col">
@@ -109,21 +111,7 @@ export const AnalyticsOverview = (): JSX.Element => {
 
             {/* Date Select */}
             <div className="ml-auto flex items-center">
-              <div className="w-[230px] h-14 bg-[#ffffff01]">
-                <div className="flex flex-col h-full justify-center cursor-pointer">
-                  <div className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4">
-                    Jun 4 – Jul 1, 2025
-                  </div>
-                  <div className="text-white text-[15px] tracking-[0] leading-6 flex items-center">
-                    Last 28 days
-                    <img
-                      className="ml-2 w-[13px] h-[7px]"
-                      alt="Dropdown arrow"
-                      src="./icon-dropdown.svg"
-                    />
-                  </div>
-                </div>
-              </div>
+              <DatePicker date={date} setDate={setDate} />
             </div>
           </div>
         </div>
