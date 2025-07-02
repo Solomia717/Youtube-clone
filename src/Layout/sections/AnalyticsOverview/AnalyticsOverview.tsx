@@ -10,6 +10,7 @@ import { Separator } from "../../../components/ui/separator";
 import StatusLineChart from "../../../components/chart/StatusLine";
 import MiniBarChart from "../../../components/chart/MiniBar";
 import { DatePicker } from "../../../components/ui/date-picker";
+import { Link } from "react-router-dom";
 
 // Data for realtime top content
 const realtimeTopContent = [
@@ -66,16 +67,18 @@ export const AnalyticsOverview = (): JSX.Element => {
       {/* Scrollable container for everything except navigation tabs */}
       <div className="overflow-y-auto">
         {/* Header */}
-        <div className="w-full flex justify-between items-center p-4">
+        <div className="w-full flex justify-between items-center pt-4 px-[25px]">
           <h1 className="font-semibold text-white text-[23.2px] tracking-[0] leading-8">
             Channel analytics
           </h1>
-          <Button
-            variant="ghost"
-            className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
-          >
-            Advanced mode
-          </Button>
+          <Link to="/admin">
+            <Button
+              variant="ghost"
+              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+            >
+              Advanced mode
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -192,17 +195,19 @@ export const AnalyticsOverview = (): JSX.Element => {
           <div className="w-[346px] p-4">
             {/* Realtime Card */}
             <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
-              <CardHeader className="pb-0">
-                <CardTitle className="text-white text-lg">Realtime</CardTitle>
-                <div className="flex items-center mt-1">
+              <CardHeader className="p-4 pb-1">
+                <CardTitle className="text-white text-[18px]">Realtime</CardTitle>
+                <div className="flex items-center pb-2">
                   <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
                   <span className="text-[#aaaaaa] text-[13px]">
                     Updating live
                   </span>
                 </div>
               </CardHeader>
-              <Separator className="my-4 bg-[#ffffff1a]" />
-              <CardContent className="space-y-6">
+              <div className="px-4">
+                <Separator className="bg-[#ffffff1a]" />
+              </div>
+              <CardContent className="p-4 space-y-6">
                 <div>
                   <h3 className="text-white text-lg font-medium">978</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>

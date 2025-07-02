@@ -9,7 +9,7 @@ const MiniBarChart: React.FC<MiniBarChartProps> = ({ data, barColor = '#00BFFF' 
     const max = Math.max(...data);
 
     return (
-        <div className="flex items-end h-9 px-1 gap-[1px]">
+        <div className="flex items-end h-[38px] px-1 gap-[1px]">
             {data.map((value, index) => {
                 const height = (value / max) * 100;
                 return (
