@@ -203,7 +203,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <StatusLineChart />
               </div>
 
-              <div className="p-4 pt-0">
+              <div className="px-6 pt-0 pb-4">
                 <Button
                   variant="ghost"
                   className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
