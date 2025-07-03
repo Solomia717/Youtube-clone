@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 const MONGO_URI = process.env.MONGODB_URI;
+const PORT = process.env.PORT || 5000;
 
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
@@ -19,8 +20,8 @@ mongoose.connect(MONGO_URI, {
 })
     .then(() => {
         console.log('✅ MongoDB connected');
-        app.listen(process.env.PORT, () => {
-            console.log(`🚀 Server running at http://localhost:${process.env.PORT}`);
+        app.listen(PORT, () => {
+            console.log(`🚀 Server running at http://localhost:${PORT}`);
         });
     })
     .catch(err => {

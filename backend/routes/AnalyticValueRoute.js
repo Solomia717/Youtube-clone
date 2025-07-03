@@ -17,14 +17,18 @@ router.put('/', async (req, res) => {
     try {
         const { _id, ...update } = req.body;
 
-        const updatedValue = await AnalyticValue.findByIdAndUpdate(
-            _id,
-            { $set: update },
-            { new: true } // return the updated document
-        );
+        let updatedValue;
 
-        if (!updatedValue) {
-            return res.status(404).json({ error: 'Document not found' });
+        if (_id) {
+            updatedValue = await AnalyticValue.findByIdAndUpdate(
+                _id,
+                { $set: update },
+                { new: true, upsert: true, runValidators: true }
+            );
+        } else {
+            // Create new if no _id provided
+            const newValue = new AnalyticValue(update);
+            updatedValue = await newValue.save();
         }
 
         res.json(updatedValue);

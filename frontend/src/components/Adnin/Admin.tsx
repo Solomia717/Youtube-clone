@@ -4,6 +4,7 @@ const apiUrl = import.meta.env.VITE_API_URL
 
 export const Admin = (): JSX.Element => {
     const [formData, setFormData] = useState({
+        _id: undefined,
         views: "",
         viewsdiff: "",
         watchtime: "",
@@ -17,7 +18,19 @@ export const Admin = (): JSX.Element => {
     useEffect(() => {
         fetch(`${apiUrl}/analyticvalue`)
             .then((res) => res.json())
-            .then((data) => setFormData(data[0]))
+            .then((data) => {
+                setFormData({
+                    _id: data[0]?._id,
+                    views: data[0]?.views ?? 0,
+                    viewsdiff: data[0]?.viewsdiff ?? 0,
+                    watchtime: data[0]?.watchtime ?? 0,
+                    watchtimediff: data[0]?.watchtimediff ?? 0,
+                    subscribers: data[0]?.subscribers ?? 0,
+                    subscribersdiff: data[0]?.subscribersdiff ?? 0,
+                    last48: data[0]?.last48 ?? 0,
+                    totalsubscribers: data[0]?.totalsubscribers ?? 0
+                })
+            })
             .catch((err) => console.error('Fetch error:', err));
     }, [])
 

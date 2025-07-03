@@ -45,32 +45,38 @@ export const AnalyticsOverview = (): JSX.Element => {
   const [statTabs, setStatTabs] = useState<any[]>([{ diff: 0, value: 0 }])
   const [values, setValues] = useState<any>({})
 
+  const safeNumber = (value: any) => {
+    const num = Number(value);
+    return isNaN(num) ? 0 : num;
+  };
+
   useEffect(() => {
     fetch(`${apiUrl}/analyticvalue`)
       .then((res) => res.json())
       .then((data) => {
         const result = data[0]
         setValues(result)
+        console.log(result)
         setStatTabs([
           {
             label: "Views",
             value: result?.views ?? 0,
-            diff: Math.abs(result?.views ?? 0 - result?.viewsdiff ?? 0),
-            sign: result?.views ?? 0 > result?.viewsdiff ?? 0,
+            diff: Math.abs(safeNumber(result?.views) - safeNumber(result?.viewsdiff)),
+            sign: safeNumber(result?.views) > safeNumber(result?.viewsdiff),
             note: "than usual",
           },
           {
             label: "Watch time (hours)",
             value: result?.watchtime ?? 0,
-            diff: Math.abs(result?.watchtime ?? 0 - result?.watchtimediff ?? 0),
-            sign: result?.watchtime ?? 0 > result?.watchtimediff ?? 0,
+            diff: Math.abs(safeNumber(result?.watchtime) - safeNumber(result?.watchtimediff)),
+            sign: safeNumber(result?.watchtime) > safeNumber(result?.watchtimediff),
             note: "than usual",
           },
           {
             label: "Subscribers",
             value: result?.subscribers ?? 0,
-            diff: Math.abs(result?.subscribers ?? 0 - result?.subscribersdiff ?? 0),
-            sign: result?.subscribers ?? 0 > result?.subscribersdiff ?? 0,
+            diff: Math.abs(safeNumber(result?.subscribers) - safeNumber(result?.subscribersdiff)),
+            sign: safeNumber(result?.subscribers) > safeNumber(result?.subscribersdiff),
             note: "than previous 28 days",
           },
         ])
@@ -146,15 +152,26 @@ export const AnalyticsOverview = (): JSX.Element => {
             {/* Performance Summary */}
             <div className="mb-6 lg:mb-[38px] text-center font-roboto px-2">
               <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-5 mb-2">
-                Keep it up! Your channel got {Math.abs(statTabs[0].value ?? 0 - statTabs[0].diff ?? 0) === 0
-                  ? '0'
-                  : ((statTabs[0].diff / Math.abs(statTabs[0].value - statTabs[0].diff)) * 100).toFixed(0)
-                }% {statTabs[0].sign ? 'more' : 'less'} views than usual in
-                <br className="hidden sm:block" />
-                <span className="sm:hidden"> </span>the last 28 days.
+                {(() => {
+                  const value = Number(statTabs[0].value ?? 0);
+                  const diff = Number(statTabs[0].diff ?? 0);
+                  console.log(value, diff)
+                  const denominator = Math.abs(value - diff);
+                  const percentage =
+                    denominator === 0 ? 0 : ((diff / denominator) * 100);
+                  const signText = statTabs[0].sign ? 'more' : 'less';
+
+                  return (
+                    <>
+                      Keep it up! Your channel got {percentage.toFixed(0)}% {signText} views than usual in
+                      <br className="hidden sm:block" />
+                      <span className="sm:hidden"> </span>the last 28 days.
+                    </>
+                  );
+                })()}
               </h2>
               <p className="text-[#aaaaaa] text-sm lg:text-[15px] tracking-[0] leading-6">
-                Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{(values?.viewdiff ?? 0).toLocaleString('en-US')} it
+                Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{(values?.viewsdiff ?? 0).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
             </div>
