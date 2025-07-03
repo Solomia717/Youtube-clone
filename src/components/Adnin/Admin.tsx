@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Admin = (): JSX.Element => {
     const [formData, setFormData] = useState({
         views: "",
-        watchTime: "",
+        viewsdiff: "",
+        watchtime: "",
+        watchtimediff: "",
         subscribers: "",
-        likes: "",
-        comments: "",
-        shares: ""
+        subscribersdiff: "",
+        last48: "",
+        totalsubscribers: ""
     });
+
+    useEffect(() => {
+        fetch('http://localhost:5000/analyticvalue')
+            .then((res) => res.json())
+            .then((data) => setFormData(data[0]))
+            .catch((err) => console.error('Fetch error:', err));
+    }, [])
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -22,7 +31,19 @@ export const Admin = (): JSX.Element => {
         e.preventDefault();
         // Here you would typically send this data to your backend
         console.log("Submitted data:", formData);
-        alert("Settings updated successfully!");
+
+        fetch('http://localhost:5000/analyticvalue', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        })
+            .then((res) => res.json())
+            .then((data) => {
+                alert("Settings updated successfully!");
+            })
+            .catch((err) => console.error('Fetch error:', err));
     };
 
     return (
@@ -48,25 +69,53 @@ export const Admin = (): JSX.Element => {
                                 placeholder="Enter number of views"
                             />
                         </div>
-
                         <div className="space-y-2">
-                            <label htmlFor="watchTime" className="block text-sm font-medium">
-                                Watch Time (hours)
+                            <label htmlFor="viewsdiff" className="block text-sm font-medium">
+                                Usual
                             </label>
                             <input
                                 type="number"
-                                id="watchTime"
-                                name="watchTime"
-                                value={formData.watchTime}
+                                id="viewsdiff"
+                                name="viewsdiff"
+                                value={formData.viewsdiff}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                placeholder="Enter watch time in hours"
+                                placeholder="Enter number of usual"
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label htmlFor="watchtime" className="block text-sm font-medium">
+                                Watch time
+                            </label>
+                            <input
+                                type="number"
+                                id="watchtime"
+                                name="watchtime"
+                                value={formData.watchtime}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                placeholder="Enter number of watchtime"
+                            />
+                        </div>
+                        <div className="space-y-2">
+                            <label htmlFor="watchtimediff" className="block text-sm font-medium">
+                                Usual
+                            </label>
+                            <input
+                                type="number"
+                                id="watchtimediff"
+                                name="watchtimediff"
+                                value={formData.watchtimediff}
+                                onChange={handleChange}
+                                className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                                placeholder="Enter number of usual"
                             />
                         </div>
 
                         <div className="space-y-2">
                             <label htmlFor="subscribers" className="block text-sm font-medium">
-                                Subscribers
+                                Subscribers plus in the last 28 days
                             </label>
                             <input
                                 type="number"
@@ -75,52 +124,52 @@ export const Admin = (): JSX.Element => {
                                 value={formData.subscribers}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                placeholder="Enter number of subscribers"
+                                placeholder="Enter number of last 28 days subscribers"
                             />
                         </div>
-
                         <div className="space-y-2">
-                            <label htmlFor="likes" className="block text-sm font-medium">
-                                Likes
+                            <label htmlFor="subscribersdiff" className="block text-sm font-medium">
+                                Subscribers plus in previous 28 days
                             </label>
                             <input
                                 type="number"
-                                id="likes"
-                                name="likes"
-                                value={formData.likes}
+                                id="subscribersdiff"
+                                name="subscribersdiff"
+                                value={formData.subscribersdiff}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                placeholder="Enter number of likes"
+                                placeholder="Enter number of previous 28 days subscribers"
                             />
                         </div>
+                    </div>
 
+                    <div className="grid grid-cols-1 gap-4">
                         <div className="space-y-2">
-                            <label htmlFor="comments" className="block text-sm font-medium">
-                                Comments
+                            <label htmlFor="totalsubscribers" className="block text-sm font-medium">
+                                Total Subscribers
                             </label>
                             <input
                                 type="number"
-                                id="comments"
-                                name="comments"
-                                value={formData.comments}
+                                id="totalsubscribers"
+                                name="totalsubscribers"
+                                value={formData.totalsubscribers}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                placeholder="Enter number of comments"
+                                placeholder="Enter number of total subscribers"
                             />
                         </div>
-
                         <div className="space-y-2">
-                            <label htmlFor="shares" className="block text-sm font-medium">
-                                Shares
+                            <label htmlFor="last48" className="block text-sm font-medium">
+                                Last 48 hours views
                             </label>
                             <input
                                 type="number"
-                                id="shares"
-                                name="shares"
-                                value={formData.shares}
+                                id="last48"
+                                name="last48"
+                                value={formData.last48}
                                 onChange={handleChange}
                                 className="w-full px-3 py-2 bg-[#1f1f1f] border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
-                                placeholder="Enter number of shares"
+                                placeholder="Enter number of views in last 48 hours"
                             />
                         </div>
                     </div>
@@ -130,7 +179,7 @@ export const Admin = (): JSX.Element => {
                             type="submit"
                             className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
                         >
-                            Save Settings
+                            Save Values
                         </button>
                     </div>
                 </form>

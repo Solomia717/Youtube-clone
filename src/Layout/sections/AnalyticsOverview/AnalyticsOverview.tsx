@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
 import {
   Card,
@@ -31,27 +31,6 @@ const realtimeTopContent = [
   },
 ];
 
-const statTabs = [
-  {
-    label: "Views",
-    value: "266.6K",
-    note: "183.3K more than usual",
-    icon: "./status-rising.svg",
-  },
-  {
-    label: "Watch time (hours)",
-    value: "712.5",
-    note: "402.5 more than usual",
-    icon: "./status-rising.svg",
-  },
-  {
-    label: "Subscribers",
-    value: "+159",
-    note: "22% less than previous 28 days",
-    icon: "./status-down.svg",
-  },
-];
-
 const mockData = Array.from({ length: 48 }, () =>
   Math.floor(Math.random() * 100)
 );
@@ -61,6 +40,41 @@ export const AnalyticsOverview = (): JSX.Element => {
   const [activeTab, setActiveTab] = useState("Overview");
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [date, setDate] = useState<Date>(new Date());
+  const [statTabs, setStatTabs] = useState<any[]>([{ diff: 0, value: 0 }])
+  const [values, setValues] = useState<any>({})
+
+  useEffect(() => {
+    fetch('http://localhost:5000/analyticvalue')
+      .then((res) => res.json())
+      .then((data) => {
+        const result = data[0]
+        setValues(result)
+        setStatTabs([
+          {
+            label: "Views",
+            value: result.views,
+            diff: Math.abs(result.views - result.viewsdiff),
+            sign: result.views > result.viewsdiff,
+            note: "than usual",
+          },
+          {
+            label: "Watch time (hours)",
+            value: result.watchtime,
+            diff: Math.abs(result.watchtime - result.watchtimediff),
+            sign: result.watchtime > result.watchtimediff,
+            note: "than usual",
+          },
+          {
+            label: "Subscribers",
+            value: result.subscribers,
+            diff: Math.abs(result.subscribers - result.subscribersdiff),
+            sign: result.subscribers > result.subscribersdiff,
+            note: "than previous 28 days",
+          },
+        ])
+      })
+      .catch((err) => console.error('Fetch error:', err));
+  }, [])
 
   return (
     <div className="w-full min-h-[calc(100vh-64px)] bg-[#282828] flex flex-col">
@@ -128,20 +142,20 @@ export const AnalyticsOverview = (): JSX.Element => {
           {/* Left Column */}
           <div className="flex-1 p-3">
             {/* Performance Summary */}
-            <div className="mb-6 text-center font-roboto">
+            <div className="mb-[38px] text-center font-roboto">
               <h2 className="font-bold text-white text-[28px] tracking-[-0.34px] leading-10 mt-5 mb-2">
-                Keep it up! Your channel got 647% more views than usual in
+                Keep it up! Your channel got {(statTabs[0].diff / Math.abs(statTabs[0].value - statTabs[0].diff) * 100).toFixed(0)}% {statTabs[0].sign ? 'more' : 'less'} views than usual in
                 <br />
                 the last 28 days.
               </h2>
               <p className="text-[#aaaaaa] text-[15px] tracking-[0] leading-6">
-                Your channel got 266,627 views, more than the 5,600–83,300 it
+                Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{Math.abs(statTabs[0].value - statTabs[0].diff).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
             </div>
 
             {/* Metrics Card */}
-            <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+            <Card className="mb-6 ml-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
               {/* Chart Header */}
               <div className="grid grid-cols-3 bg-[#212121]">
                 {statTabs.map((tab, i) => {
@@ -159,16 +173,25 @@ export const AnalyticsOverview = (): JSX.Element => {
                       </p>
                       <div className="flex items-center justify-center">
                         <span className="text-white text-2xl tracking-[-0.29px] leading-8">
-                          {tab.value}
+                          {tab.label == 'Subscribers' ? '+' : ''}
+                          {`${tab.value > 1000 ?
+                            (Number(tab.value) / 1000).toFixed(1)
+                            : tab.value
+                            }${tab.value > 1000 ? 'K' : ''}`}
                         </span>
                         <img
                           className="w-[17px] h-[17px] ml-1"
-                          src={tab.icon}
+                          src={tab.sign ? './status-rising.svg' : './status-down.svg'}
                           alt="indicator"
                         />
                       </div>
                       <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-2">
-                        {tab.note}
+                        {`${tab.diff > 1000 ?
+                          (Number(tab.diff) / 1000).toFixed(1)
+                          : tab.label === 'Subscribers' ?
+                            (tab.diff / values.subscribersdiff * 100).toFixed(0)
+                            : tab.diff
+                          }${tab.label === 'Subscribers' ? '%' : tab.diff > 1000 ? 'K' : ''} ${tab.sign ? 'more' : 'less'} ${tab.note}`}
                       </p>
                     </div>
                   );
@@ -180,10 +203,10 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <StatusLineChart />
               </div>
 
-              <div className="p-4">
+              <div className="p-4 pt-0">
                 <Button
                   variant="ghost"
-                  className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+                  className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
                 >
                   See more
                 </Button>
@@ -195,7 +218,7 @@ export const AnalyticsOverview = (): JSX.Element => {
           <div className="w-[346px] p-4">
             {/* Realtime Card */}
             <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
-              <CardHeader className="p-4 pb-1">
+              <CardHeader className="p-3 px-4 pb-1 space-y-0">
                 <CardTitle className="text-white text-[18px]">Realtime</CardTitle>
                 <div className="flex items-center pb-2">
                   <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
@@ -207,13 +230,13 @@ export const AnalyticsOverview = (): JSX.Element => {
               <div className="px-4">
                 <Separator className="bg-[#ffffff1a]" />
               </div>
-              <CardContent className="p-4 space-y-6">
+              <CardContent className="p-3 px-4 space-y-3">
                 <div>
-                  <h3 className="text-white text-lg font-medium">978</h3>
+                  <h3 className="text-white text-lg font-medium">{values.totalsubscribers?.toLocaleString('en-US')}</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
                   >
                     See live count
                   </Button>
@@ -222,13 +245,13 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <Separator className="bg-[#ffffff1a]" />
 
                 <div>
-                  <h3 className="text-white text-lg font-medium">14,512</h3>
+                  <h3 className="text-white text-lg font-medium">{values.last48?.toLocaleString('en-US')}</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-2">
                     Views · Last 48 hours
                   </p>
 
                   {/* Mini chart */}
-                  <div className="text-white w-full">
+                  <div className="text-white w-full mb-5">
                     <MiniBarChart data={mockData} />
                     <div className="flex justify-between text-xs text-gray-400 mb-1 px-1">
                       <span>-48h</span>
@@ -246,7 +269,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   {realtimeTopContent.map((item, index) => (
                     <div
                       key={index}
-                      className="flex items-center justify-between mb-4"
+                      className="flex items-center justify-between mb-2"
                     >
                       <div className="flex items-center">
                         <div
@@ -273,7 +296,7 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 mt-2"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 mt-2"
                   >
                     See more
                   </Button>
