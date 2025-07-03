@@ -81,14 +81,14 @@ export const AnalyticsOverview = (): JSX.Element => {
       {/* Scrollable container for everything except navigation tabs */}
       <div className="overflow-y-auto">
         {/* Header */}
-        <div className="w-full flex justify-between items-center pt-4 px-[25px]">
-          <h1 className="font-semibold text-white text-[23.2px] tracking-[0] leading-8">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-4 px-4 sm:px-[25px] gap-4 sm:gap-0">
+          <h1 className="font-semibold text-white text-xl sm:text-[23.2px] tracking-[0] leading-8">
             Channel analytics
           </h1>
           <Link to="/admin">
             <Button
               variant="ghost"
-              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
+              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto"
             >
               Advanced mode
             </Button>
@@ -98,21 +98,21 @@ export const AnalyticsOverview = (): JSX.Element => {
 
       {/* Navigation Tabs - Sticky */}
       <div className="w-full bg-[#282828] border-b border-[#ffffff1a] sticky top-16 z-10">
-        <div className="relative w-full px-6">
-          <div className="flex items-center h-12 mt-[23px]">
+        <div className="relative w-full px-4 sm:px-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center h-auto sm:h-12 mt-[23px] gap-4 sm:gap-0 pb-4 sm:pb-0">
             {/* Tabs */}
-            <div className="flex space-x-10">
+            <div className="flex space-x-6 sm:space-x-10 overflow-x-auto w-full sm:w-auto">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab;
                 return (
                   <div
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`relative h-12 cursor-pointer group`}
+                    className={`relative h-12 cursor-pointer group flex-shrink-0`}
                   >
                     <div className="h-12 flex items-center">
                       <span
-                        className={`font-medium text-[15px] leading-6 whitespace-nowrap transition-colors duration-200
+                        className={`font-medium text-sm sm:text-[15px] leading-6 whitespace-nowrap transition-colors duration-200
                         ${isActive ? "text-white" : "text-[#aaaaaa] group-hover:text-white"}`}
                       >
                         {tab}
@@ -127,7 +127,7 @@ export const AnalyticsOverview = (): JSX.Element => {
             </div>
 
             {/* Date Select */}
-            <div className="ml-auto flex items-center">
+            <div className="ml-0 sm:ml-auto flex items-center w-full sm:w-auto">
               <DatePicker date={date} setDate={setDate} />
             </div>
           </div>
@@ -138,41 +138,41 @@ export const AnalyticsOverview = (): JSX.Element => {
       <div className="overflow-y-auto flex-1">
 
         {/* Main Content */}
-        <div className="flex flex-row">
+        <div className="flex flex-col lg:flex-row">
           {/* Left Column */}
-          <div className="flex-1 p-3">
+          <div className="flex-1 p-3 lg:p-3">
             {/* Performance Summary */}
-            <div className="mb-[38px] text-center font-roboto">
-              <h2 className="font-bold text-white text-[28px] tracking-[-0.34px] leading-10 mt-5 mb-2">
+            <div className="mb-6 lg:mb-[38px] text-center font-roboto px-2">
+              <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-5 mb-2">
                 Keep it up! Your channel got {(statTabs[0].diff / Math.abs(statTabs[0].value - statTabs[0].diff) * 100).toFixed(0)}% {statTabs[0].sign ? 'more' : 'less'} views than usual in
-                <br />
-                the last 28 days.
+                <br className="hidden sm:block" />
+                <span className="sm:hidden"> </span>the last 28 days.
               </h2>
-              <p className="text-[#aaaaaa] text-[15px] tracking-[0] leading-6">
+              <p className="text-[#aaaaaa] text-sm lg:text-[15px] tracking-[0] leading-6">
                 Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{Math.abs(statTabs[0].value - statTabs[0].diff).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
             </div>
 
             {/* Metrics Card */}
-            <Card className="mb-6 ml-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+            <Card className="mb-6 mx-0 lg:ml-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
               {/* Chart Header */}
-              <div className="grid grid-cols-3 bg-[#212121]">
+              <div className="grid grid-cols-1 sm:grid-cols-3 bg-[#212121]">
                 {statTabs.map((tab, i) => {
                   const isActive = i === activeTabIndex;
                   return (
                     <div
                       key={i}
                       onClick={() => setActiveTabIndex(i)}
-                      className={`p-4 font-roboto text-center cursor-pointer transition-colors duration-200
+                      className={`p-3 sm:p-4 font-roboto text-center cursor-pointer transition-colors duration-200
                     ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
-                    ${i < statTabs.length - 1 ? "border-r border-[#ffffff1a]" : ""}`}
+                    ${i < statTabs.length - 1 ? "border-b sm:border-b-0 sm:border-r border-[#ffffff1a]" : ""}`}
                     >
                       <p className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mb-2">
                         {tab.label}
                       </p>
                       <div className="flex items-center justify-center">
-                        <span className="text-white text-2xl tracking-[-0.29px] leading-8">
+                        <span className="text-white text-xl sm:text-2xl tracking-[-0.29px] leading-8">
                           {tab.label == 'Subscribers' ? '+' : ''}
                           {`${tab.value > 1000 ?
                             (Number(tab.value) / 1000).toFixed(1)
@@ -203,7 +203,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <StatusLineChart />
               </div>
 
-              <div className="px-6 pt-0 pb-4">
+              <div className="px-4 sm:px-6 pt-0 pb-4">
                 <Button
                   variant="ghost"
                   className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
@@ -215,11 +215,11 @@ export const AnalyticsOverview = (): JSX.Element => {
           </div>
 
           {/* Right Column */}
-          <div className="w-[346px] p-4">
+          <div className="w-full lg:w-[346px] p-3 lg:p-4">
             {/* Realtime Card */}
             <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
               <CardHeader className="p-3 px-4 pb-1 space-y-0">
-                <CardTitle className="text-white text-[18px]">Realtime</CardTitle>
+                <CardTitle className="text-white text-lg lg:text-[18px]">Realtime</CardTitle>
                 <div className="flex items-center pb-2">
                   <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
                   <span className="text-[#aaaaaa] text-[13px]">
@@ -236,7 +236,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 w-full sm:w-auto"
                   >
                     See live count
                   </Button>
@@ -271,24 +271,25 @@ export const AnalyticsOverview = (): JSX.Element => {
                       key={index}
                       className="flex items-center justify-between mb-2"
                     >
-                      <div className="flex items-center">
+                      <div className="flex items-center flex-1 min-w-0">
                         <div
-                          className="w-14 h-8 rounded bg-cover bg-center mr-4 relative"
+                          className="w-12 sm:w-14 h-7 sm:h-8 rounded bg-cover bg-center mr-3 sm:mr-4 relative flex-shrink-0"
                           style={{ backgroundImage: `url(${item.thumbnail})` }}
                         >
-                          <div className="absolute right-0 bottom-0 w-4 h-4 bg-[#282828] rounded-sm flex items-center justify-center">
+                          <div className="absolute right-0 bottom-0 w-3 sm:w-4 h-3 sm:h-4 bg-[#282828] rounded-sm flex items-center justify-center">
                             <img
-                              className="w-1.5 h-[9px]"
+                              className="w-1 sm:w-1.5 h-2 sm:h-[9px]"
                               alt="Play icon"
                               src={`./content-icon.svg`}
                             />
                           </div>
                         </div>
-                        <span className="text-white text-[13px]">
-                          {item.title.length > 21 ? `${item.title.slice(0, 21)}...` : item.title}
+                        <span className="text-white text-xs sm:text-[13px] truncate">
+                          <span className="sm:hidden">{item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}</span>
+                          <span className="hidden sm:inline">{item.title.length > 21 ? `${item.title.slice(0, 21)}...` : item.title}</span>
                         </span>
                       </div>
-                      <span className="text-white text-[13px] text-right">
+                      <span className="text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
                         {item.views}
                       </span>
                     </div>
@@ -296,7 +297,7 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 mt-2"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 mt-2 w-full sm:w-auto"
                   >
                     See more
                   </Button>
