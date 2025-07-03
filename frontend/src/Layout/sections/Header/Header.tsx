@@ -33,7 +33,13 @@ export const Header = ({ onMenuClick }: HeaderProps): JSX.Element => {
 
           {/* Logo */}
           <Link to="/">
-            <div className="h-6 w-[97px] bg-[url(./logo.svg)] bg-[100%_100%] cursor-pointer" />
+            <div className="h-6 w-[97px] cursor-pointer" >
+              <img
+                className="w-[97px] h-6"
+                alt="Logo"
+                src="./logo.svg"
+              />
+            </div>
           </Link>
         </div>
 

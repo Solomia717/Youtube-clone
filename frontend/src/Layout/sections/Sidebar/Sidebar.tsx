@@ -55,7 +55,13 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
       `}>
         {/* Profile section */}
         <div className="w-full h-52 flex flex-col items-center">
-          <div className="w-28 h-28 mt-6 rounded-[56px] bg-[url(./profile-avatar.jpg)] bg-cover bg-[50%_50%]" />
+          <div className="w-28 h-28 mt-6 rounded-[56px]" >
+            <img
+              className="w-28 h-28 rounded-[56px] object-contain object-cover"
+              alt="profile avatar"
+              src="./profile-avatar.jpg"
+            />
+          </div>
           <div className="mt-4 text-center">
             <div className="[font-family:'Roboto',Helvetica] font-medium text-white text-[15px] tracking-[0] leading-6">
               Your channel
