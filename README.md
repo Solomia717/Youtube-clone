@@ -4,8 +4,8 @@ A full-stack YouTube clone application built with React, TypeScript, Node.js, an
 
 ## 🚀 Live Demo
 
-- **Frontend**: [Deployed on Vercel](https://your-frontend-url.vercel.app)
-- **Backend API**: [Deployed on Vercel](https://your-backend-url.vercel.app)
+- **Frontend**: [Deployed on Vercel](https://analyticview.vercel.app/)
+- **Backend API**: [Deployed on Vercel](https://youtubeclone-5171.onrender.com)
 
 ## 🛠️ Tech Stack
 
