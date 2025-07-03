@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 export const Admin = (): JSX.Element => {
     const [formData, setFormData] = useState({
         views: "",
@@ -13,7 +15,7 @@ export const Admin = (): JSX.Element => {
     });
 
     useEffect(() => {
-        fetch('http://localhost:5000/analyticvalue')
+        fetch(`${apiUrl}/analyticvalue`)
             .then((res) => res.json())
             .then((data) => setFormData(data[0]))
             .catch((err) => console.error('Fetch error:', err));
@@ -32,7 +34,7 @@ export const Admin = (): JSX.Element => {
         // Here you would typically send this data to your backend
         console.log("Submitted data:", formData);
 
-        fetch('http://localhost:5000/analyticvalue', {
+        fetch(`${apiUrl}/analyticvalue`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

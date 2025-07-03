@@ -12,6 +12,8 @@ import MiniBarChart from "../../../components/chart/MiniBar";
 import { DatePicker } from "../../../components/ui/date-picker";
 import { Link } from "react-router-dom";
 
+const apiUrl = import.meta.env.VITE_API_URL
+
 // Data for realtime top content
 const realtimeTopContent = [
   {
@@ -44,7 +46,7 @@ export const AnalyticsOverview = (): JSX.Element => {
   const [values, setValues] = useState<any>({})
 
   useEffect(() => {
-    fetch('http://localhost:5000/analyticvalue')
+    fetch(`${apiUrl}/analyticvalue`)
       .then((res) => res.json())
       .then((data) => {
         const result = data[0]
@@ -52,23 +54,23 @@ export const AnalyticsOverview = (): JSX.Element => {
         setStatTabs([
           {
             label: "Views",
-            value: result.views,
-            diff: Math.abs(result.views - result.viewsdiff),
-            sign: result.views > result.viewsdiff,
+            value: result?.views ?? 0,
+            diff: Math.abs(result?.views ?? 0 - result?.viewsdiff ?? 0),
+            sign: result?.views ?? 0 > result?.viewsdiff ?? 0,
             note: "than usual",
           },
           {
             label: "Watch time (hours)",
-            value: result.watchtime,
-            diff: Math.abs(result.watchtime - result.watchtimediff),
-            sign: result.watchtime > result.watchtimediff,
+            value: result?.watchtime ?? 0,
+            diff: Math.abs(result?.watchtime ?? 0 - result?.watchtimediff ?? 0),
+            sign: result?.watchtime ?? 0 > result?.watchtimediff ?? 0,
             note: "than usual",
           },
           {
             label: "Subscribers",
-            value: result.subscribers,
-            diff: Math.abs(result.subscribers - result.subscribersdiff),
-            sign: result.subscribers > result.subscribersdiff,
+            value: result?.subscribers ?? 0,
+            diff: Math.abs(result?.subscribers ?? 0 - result?.subscribersdiff ?? 0),
+            sign: result?.subscribers ?? 0 > result?.subscribersdiff ?? 0,
             note: "than previous 28 days",
           },
         ])
@@ -144,12 +146,15 @@ export const AnalyticsOverview = (): JSX.Element => {
             {/* Performance Summary */}
             <div className="mb-6 lg:mb-[38px] text-center font-roboto px-2">
               <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-5 mb-2">
-                Keep it up! Your channel got {(statTabs[0].diff / Math.abs(statTabs[0].value - statTabs[0].diff) * 100).toFixed(0)}% {statTabs[0].sign ? 'more' : 'less'} views than usual in
+                Keep it up! Your channel got {Math.abs(statTabs[0].value ?? 0 - statTabs[0].diff ?? 0) === 0
+                  ? '0'
+                  : ((statTabs[0].diff / Math.abs(statTabs[0].value - statTabs[0].diff)) * 100).toFixed(0)
+                }% {statTabs[0].sign ? 'more' : 'less'} views than usual in
                 <br className="hidden sm:block" />
                 <span className="sm:hidden"> </span>the last 28 days.
               </h2>
               <p className="text-[#aaaaaa] text-sm lg:text-[15px] tracking-[0] leading-6">
-                Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{Math.abs(statTabs[0].value - statTabs[0].diff).toLocaleString('en-US')} it
+                Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{(values?.viewdiff ?? 0).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
             </div>
@@ -186,12 +191,36 @@ export const AnalyticsOverview = (): JSX.Element => {
                         />
                       </div>
                       <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-2">
-                        {`${tab.diff > 1000 ?
-                          (Number(tab.diff) / 1000).toFixed(1)
-                          : tab.label === 'Subscribers' ?
-                            (tab.diff / values.subscribersdiff * 100).toFixed(0)
-                            : tab.diff
-                          }${tab.label === 'Subscribers' ? '%' : tab.diff > 1000 ? 'K' : ''} ${tab.sign ? 'more' : 'less'} ${tab.note}`}
+                        {(() => {
+                          const diff = isNaN(Number(tab.diff)) || tab.diff === '' ? 0 : Number(tab.diff);
+                          const isLarge = diff > 1000;
+                          const label = tab.label;
+                          const sign = tab.sign ?? 0;
+                          const note = tab.note ?? '';
+                          const subDiff = Number(values?.subscribersdiff ?? 0);
+
+                          let formattedDiff = '';
+                          let suffix = '';
+
+                          if (label === 'Subscribers') {
+                            // Prevent division by zero
+                            if (subDiff === 0) {
+                              formattedDiff = '0';
+                            } else {
+                              formattedDiff = ((diff / subDiff) * 100).toFixed(0);
+                            }
+                            suffix = '%';
+                          } else if (isLarge) {
+                            formattedDiff = (diff / 1000).toFixed(1);
+                            suffix = 'K';
+                          } else {
+                            formattedDiff = diff.toString();
+                          }
+
+                          const direction = sign ? 'more' : 'less';
+
+                          return `${formattedDiff}${suffix} ${direction} ${note}`;
+                        })()}
                       </p>
                     </div>
                   );
@@ -232,7 +261,7 @@ export const AnalyticsOverview = (): JSX.Element => {
               </div>
               <CardContent className="p-3 px-4 space-y-3">
                 <div>
-                  <h3 className="text-white text-lg font-medium">{values.totalsubscribers?.toLocaleString('en-US')}</h3>
+                  <h3 className="text-white text-lg font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
                   <Button
                     variant="ghost"
@@ -245,7 +274,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <Separator className="bg-[#ffffff1a]" />
 
                 <div>
-                  <h3 className="text-white text-lg font-medium">{values.last48?.toLocaleString('en-US')}</h3>
+                  <h3 className="text-white text-lg font-medium">{values?.last48?.toLocaleString('en-US')}</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-2">
                     Views · Last 48 hours
                   </p>
