@@ -62,11 +62,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
               src="./profile-avatar.jpg"
             />
           </div>
-          <div className="mt-4 text-center">
-            <div className="[font-family:'Roboto',Helvetica] font-medium text-white text-[15px] tracking-[0] leading-6">
+          <div className="mt-[15px] text-center">
+            <div className="font-roboto font-medium text-white text-[15px] tracking-[0] leading-6">
               Your channel
             </div>
-            <div className="[font-family:'Roboto',Helvetica] font-normal text-[#aaaaaa] text-xs tracking-[0.13px] leading-4">
+            <div className="font-roboto font-normal text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mt-1">
               1nterCartel
             </div>
           </div>
@@ -88,16 +88,15 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                   }
                 }}
               >
-                <div className="w-6 h-6 ml-3 relative">
+                <div className="w-6 h-6 ml-3 relative flex items-center justify-center">
                   <img
-                    className="absolute w-[18px] h-[18px] top-[3px] left-[3px]"
                     alt={item.name}
                     src={item.icon}
                   />
                 </div>
-                <div className="ml-[36px] overflow-hidden">
+                <div className="ml-6 overflow-hidden">
                   <div
-                    className={`[font-family:'Roboto',Helvetica] ${index === selectedMenu ? "font-medium" : "font-normal"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
+                    className={`font-roboto ${index === selectedMenu ? "font-normal" : "font-light"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
                   >
                     {item.name}
                   </div>
@@ -123,8 +122,8 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                     src={item.icon}
                   />
                 </div>
-                <div className="ml-[36px] overflow-hidden">
-                  <div className="[font-family:'Roboto',Helvetica] font-normal text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
+                <div className="ml-6 overflow-hidden">
+                  <div className="font-roboto font-light text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
                     {item.name}
                   </div>
                 </div>
