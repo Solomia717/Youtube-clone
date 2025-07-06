@@ -176,7 +176,9 @@ export const AnalyticsOverview = (): JSX.Element => {
             </div>
 
             {/* Metrics Card */}
-            <Card className="w-[862px] mb-6 mx-0 lg:mx-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+            <Card
+              className="w-[clamp(300px, 56.99vw, 862px)] mb-6 mx-0 lg:mx-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden"
+            >
               {/* Chart Header */}
               <div className="grid grid-cols-1 sm:grid-cols-3 bg-[#212121]">
                 {statTabs.map((tab, i) => {
