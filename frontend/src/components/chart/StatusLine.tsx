@@ -35,12 +35,12 @@ const labels = [
 ];
 
 const dataValues = [
-    11000, 11500, 11800, 12000, 12300,
-    11500, 11000, 10000, 8000, 7000,
-    6700, 5900, 7000, 7300, 7500,
+    11000, 11500, 11800, 13000, 14000,
+    13100, 11000, 10000, 8000, 7000,
+    6700, 5000, 8000, 6000, 7500,
     8000, 8100, 8300, 8000, 7900,
     7900, 8500, 8700, 8600, 8500,
-    8000, 7800, 8000, 8100, 8250,
+    8000, 7500, 8000, 8300, 8700,
     8400
 ];
 
@@ -51,10 +51,11 @@ const data: ChartData<'line'> = {
             label: 'Views',
             data: dataValues,
             fill: true,
-            borderColor: '#00BFFF',
-            backgroundColor: 'rgba(0, 191, 255, 0.1)',
-            tension: 0.4,
+            borderColor: 'rgb(0, 187, 255)',
+            backgroundColor: 'rgba(0, 225, 255, 0.1)',
+            tension: 0,
             pointRadius: 0,
+            borderWidth: 2
         }
     ]
 };
@@ -69,6 +70,11 @@ const options: ChartOptions<'line'> = {
             intersect: false,
         },
     },
+    layout: {
+        padding: {
+            bottom: -5 // 👈 additional pull-up of labels (use with caution)
+        }
+    },
     scales: {
         x: {
             offset: false,
@@ -80,10 +86,8 @@ const options: ChartOptions<'line'> = {
                     const label = this.getLabelForValue(value);
 
                     if (index === 0) {
-                        // First label: add leading spaces
                         return '                ' + label;
                     } else if (index === ticks.length - 1) {
-                        // Last label: add trailing spaces
                         return label + '                ';
                     }
 
@@ -95,7 +99,8 @@ const options: ChartOptions<'line'> = {
             },
             grid: {
                 display: false
-            }
+            },
+            position: 'bottom'
         },
         y: {
             position: 'right',
@@ -115,7 +120,7 @@ const options: ChartOptions<'line'> = {
                 color: 'rgba(200, 200, 200, 0.2)',
                 lineWidth: (context) => {
                     // Make the line at y=0 thicker
-                    return context.tick.value === 0 ? 4 : 1;
+                    return context.tick.value === 0 ? 3 : 1;
                 }
             }
         }
@@ -124,7 +129,7 @@ const options: ChartOptions<'line'> = {
 
 const StatusLineChart: React.FC = () => {
     return (
-        <div style={{ height: '174px', padding: '1rem 0', marginLeft: '-25px' }}>
+        <div className='h-[163px] ml-[-37px] p-0 pr-7'>
             <Line data={data} options={options} />
         </div>
     );

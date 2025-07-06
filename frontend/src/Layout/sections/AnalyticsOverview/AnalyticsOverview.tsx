@@ -34,7 +34,7 @@ const realtimeTopContent = [
 ];
 
 const mockData = Array.from({ length: 48 }, () =>
-  Math.floor(Math.random() * 100)
+  Math.floor(Math.random() * 50) + 51
 );
 
 export const AnalyticsOverview = (): JSX.Element => {
@@ -89,14 +89,14 @@ export const AnalyticsOverview = (): JSX.Element => {
       {/* Scrollable container for everything except navigation tabs */}
       <div className="overflow-y-auto">
         {/* Header */}
-        <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-4 px-4 sm:px-[25px] gap-4 sm:gap-0">
-          <h1 className="font-semibold text-white text-xl sm:text-[23.2px] tracking-[0] leading-8">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-[22px] px-[15px] sm:px-[30px] gap-4 sm:gap-0">
+          <h1 className="font-medium text-white text-xl sm:text-[23.2px] tracking-[0] leading-8">
             Channel analytics
           </h1>
           <Link to="/admin">
             <Button
               variant="ghost"
-              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto"
+              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto font-normal"
             >
               Advanced mode
             </Button>
@@ -106,8 +106,8 @@ export const AnalyticsOverview = (): JSX.Element => {
 
       {/* Navigation Tabs - Sticky */}
       <div className="w-full bg-[#282828] border-b border-[#ffffff1a] sticky top-16 z-10">
-        <div className="relative w-full px-4 sm:px-6">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center h-auto sm:h-12 mt-[23px] gap-4 sm:gap-0 pb-4 sm:pb-0">
+        <div className="relative w-full px-4 sm:px-[30px]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center h-auto sm:h-12 mt-[21px] gap-4 sm:gap-0 pb-4 sm:pb-0">
             {/* Tabs */}
             <div className="flex space-x-6 sm:space-x-10 overflow-x-auto w-full sm:w-auto">
               {tabs.map((tab) => {
@@ -135,7 +135,7 @@ export const AnalyticsOverview = (): JSX.Element => {
             </div>
 
             {/* Date Select */}
-            <div className="ml-0 sm:ml-auto flex items-center w-full sm:w-auto">
+            <div className="ml-0 sm:ml-auto flex items-center w-full sm:w-auto mt-[-20px]">
               <DatePicker date={date} setDate={setDate} />
             </div>
           </div>
@@ -151,11 +151,10 @@ export const AnalyticsOverview = (): JSX.Element => {
           <div className="flex-1 p-3 lg:p-3">
             {/* Performance Summary */}
             <div className="mb-6 lg:mb-[38px] text-center font-roboto px-2">
-              <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-5 mb-2">
+              <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-[18px] mb-[17px]">
                 {(() => {
                   const value = Number(statTabs[0].value ?? 0);
                   const diff = Number(statTabs[0].diff ?? 0);
-                  console.log(value, diff)
                   const denominator = Math.abs(value - diff);
                   const percentage =
                     denominator === 0 ? 0 : ((diff / denominator) * 100);
@@ -170,14 +169,14 @@ export const AnalyticsOverview = (): JSX.Element => {
                   );
                 })()}
               </h2>
-              <p className="text-[#aaaaaa] text-sm lg:text-[15px] tracking-[0] leading-6">
+              <p className="text-[#aaaaaa] text-sm lg:text-[15px] tracking-[0] leading-6 mb-[1px]">
                 Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{(values?.viewsdiff ?? 0).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
             </div>
 
             {/* Metrics Card */}
-            <Card className="mb-6 mx-0 lg:ml-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
+            <Card className="w-[862px] mb-6 mx-0 lg:mx-3 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
               {/* Chart Header */}
               <div className="grid grid-cols-1 sm:grid-cols-3 bg-[#212121]">
                 {statTabs.map((tab, i) => {
@@ -186,11 +185,11 @@ export const AnalyticsOverview = (): JSX.Element => {
                     <div
                       key={i}
                       onClick={() => setActiveTabIndex(i)}
-                      className={`p-3 sm:p-4 font-roboto text-center cursor-pointer transition-colors duration-200
+                      className={`p-3 sm:pt-4 sm:pb-5 sm:px-2 font-roboto text-center cursor-pointer transition-colors duration-200
                     ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
                     ${i < statTabs.length - 1 ? "border-b sm:border-b-0 sm:border-r border-[#ffffff1a]" : ""}`}
                     >
-                      <p className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mb-2">
+                      <p className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mb-1">
                         {tab.label}
                       </p>
                       <div className="flex items-center justify-center">
@@ -202,12 +201,12 @@ export const AnalyticsOverview = (): JSX.Element => {
                             }${tab.value > 1000 ? 'K' : ''}`}
                         </span>
                         <img
-                          className="w-[17px] h-[17px] ml-1"
+                          className="w-[17px] h-[17px] ml-2"
                           src={tab.sign ? './status-rising.svg' : './status-down.svg'}
                           alt="indicator"
                         />
                       </div>
-                      <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-2">
+                      <p className="text-[#aaaaaa] text-xs italic tracking-[0.13px] leading-4 mt-[5px]">
                         {(() => {
                           const diff = isNaN(Number(tab.diff)) || tab.diff === '' ? 0 : Number(tab.diff);
                           const isLarge = diff > 1000;
@@ -245,14 +244,14 @@ export const AnalyticsOverview = (): JSX.Element => {
               </div>
 
               {/* Graph */}
-              <div className="mt-2">
+              <div className="mt-8">
                 <StatusLineChart />
               </div>
 
-              <div className="px-4 sm:px-6 pt-0 pb-4">
+              <div className="px-4 sm:px-6 pt-0 pb-4 mt-6">
                 <Button
                   variant="ghost"
-                  className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8"
+                  className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
                 >
                   See more
                 </Button>
@@ -266,8 +265,8 @@ export const AnalyticsOverview = (): JSX.Element => {
             <Card className="mb-6 bg-[#282828] border border-[#ffffff33] rounded-2xl overflow-hidden">
               <CardHeader className="p-3 px-4 pb-1 space-y-0">
                 <CardTitle className="text-white text-lg lg:text-[18px]">Realtime</CardTitle>
-                <div className="flex items-center pb-2">
-                  <div className="w-2 h-2 bg-[#41b4d9] rounded mr-2"></div>
+                <div className="flex items-center pb-[10px]" style={{ marginTop: '-2px' }}>
+                  <div className="w-2 h-2 bg-[#41b4d9] rounded mr-1"></div>
                   <span className="text-[#aaaaaa] text-[13px]">
                     Updating live
                   </span>
@@ -276,13 +275,13 @@ export const AnalyticsOverview = (): JSX.Element => {
               <div className="px-4">
                 <Separator className="bg-[#ffffff1a]" />
               </div>
-              <CardContent className="p-3 px-4 space-y-3">
+              <CardContent className="pt-[13px] pb-3 px-4 space-y-3">
                 <div>
                   <h3 className="text-white text-lg font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
-                  <p className="text-[#aaaaaa] text-[13px] mb-2">Subscribers</p>
+                  <p className="text-[#aaaaaa] text-[13px] mb-[10px]">Subscribers</p>
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 w-full sm:w-auto"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto"
                   >
                     See live count
                   </Button>
@@ -290,16 +289,16 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                 <Separator className="bg-[#ffffff1a]" />
 
-                <div>
+                <div className="pt-[2px]">
                   <h3 className="text-white text-lg font-medium">{values?.last48?.toLocaleString('en-US')}</h3>
-                  <p className="text-[#aaaaaa] text-[13px] mb-2">
+                  <p className="text-[#aaaaaa] text-[13px] mt-[-2px] mb-4">
                     Views · Last 48 hours
                   </p>
 
                   {/* Mini chart */}
-                  <div className="text-white w-full mb-5">
+                  <div className="text-white w-full mb-8">
                     <MiniBarChart data={mockData} />
-                    <div className="flex justify-between text-xs text-gray-400 mb-1 px-1">
+                    <div className="flex justify-between text-xs text-gray-400 mb-1 mt-[-1px]">
                       <span>-48h</span>
                       <span>Now</span>
                     </div>
@@ -307,7 +306,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center mb-2">
+                  <div className="flex justify-between items-center mb-5">
                     <span className="text-[#aaaaaa] text-xs">Top content</span>
                     <span className="text-[#aaaaaa] text-xs">Views</span>
                   </div>
@@ -319,7 +318,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                     >
                       <div className="flex items-center flex-1 min-w-0">
                         <div
-                          className="w-12 sm:w-14 h-7 sm:h-8 rounded bg-cover bg-center mr-3 sm:mr-4 relative flex-shrink-0"
+                          className="w-12 sm:w-14 h-7 sm:h-8 rounded bg-cover bg-center mr-4 sm:mr-3 relative flex-shrink-0"
                           style={{ backgroundImage: `url(${item.thumbnail})` }}
                         >
                           <div className="absolute right-0 bottom-0 w-3 sm:w-4 h-3 sm:h-4 bg-[#282828] rounded-sm flex items-center justify-center">
@@ -330,9 +329,9 @@ export const AnalyticsOverview = (): JSX.Element => {
                             />
                           </div>
                         </div>
-                        <span className="text-white text-xs sm:text-[13px] truncate">
+                        <span className="text-white text-xs sm:text-[13px] truncate font-roboto font-light">
                           <span className="sm:hidden">{item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}</span>
-                          <span className="hidden sm:inline">{item.title.length > 21 ? `${item.title.slice(0, 21)}...` : item.title}</span>
+                          <span className="hidden sm:inline">{item.title.length > 25 ? `${item.title.slice(0, 25)}...` : item.title}</span>
                         </span>
                       </div>
                       <span className="text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
@@ -343,7 +342,7 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                   <Button
                     variant="ghost"
-                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-8 mt-2 w-full sm:w-auto"
+                    className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 mt-3 w-full sm:w-auto"
                   >
                     See more
                   </Button>
