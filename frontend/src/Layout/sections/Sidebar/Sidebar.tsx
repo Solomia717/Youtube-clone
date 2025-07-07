@@ -26,12 +26,10 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
     {
       name: "Settings",
       icon: "./sidebar/setting.svg",
-      iconClass: "w-[19px] h-5 top-0.5 left-0.5",
     },
     {
       name: "Send feedback",
       icon: "./sidebar/feedback.svg",
-      iconClass: "w-4 h-5 top-0.5 left-1",
     },
   ];
 
@@ -62,19 +60,19 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
               src="./profile-avatar.jpg"
             />
           </div>
-          <div className="mt-[15px] text-center">
+          <div className="mt-[14px] ml-[-4px] text-center">
             <div className="font-roboto font-medium text-white text-[15px] tracking-[0] leading-6">
               Your channel
             </div>
-            <div className="font-roboto font-normal text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mt-1">
+            <div className="font-roboto font-normal text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mt-[2px]">
               1nterCartel
             </div>
           </div>
         </div>
 
         {/* Navigation menu */}
-        <ScrollArea className="h-[344px]">
-          <div className="px-3 py-0 border-b">
+        <ScrollArea className="h-[calc(100vh-385px)]">
+          <div className="px-[9px] py-0 border-b">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -109,15 +107,14 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
         {/* Footer section */}
         <div className="w-full mt-auto">
           <Separator className="w-full bg-[#ffffff1a]" />
-          <div className="px-3 py-2">
+          <div className="px-[9px] py-2">
             {footerItems.map((item, index) => (
               <div
                 key={index}
                 className="w-[231px] h-12 rounded-lg flex items-center cursor-pointer hover:bg-[#2a2a2a] transition-colors duration-200"
               >
-                <div className="w-6 h-6 ml-3 relative">
+                <div className="w-6 h-6 ml-3 relative flex items-center justify-center">
                   <img
-                    className={`absolute ${item.iconClass}`}
                     alt={item.name}
                     src={item.icon}
                   />
