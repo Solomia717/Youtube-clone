@@ -51,11 +51,11 @@ const data: ChartData<'line'> = {
             label: 'Views',
             data: dataValues,
             fill: true,
-            borderColor: 'rgb(0, 187, 255)',
-            backgroundColor: 'rgba(0, 225, 255, 0.1)',
+            borderColor: 'rgb(0, 221, 255)',
+            backgroundColor: 'rgba(40, 47, 51,0.8)',
             tension: 0,
             pointRadius: 0,
-            borderWidth: 2
+            borderWidth: 1.5
         }
     ]
 };
@@ -117,11 +117,10 @@ const options: ChartOptions<'line'> = {
             },
             grid: {
                 display: true,
-                color: 'rgba(200, 200, 200, 0.2)',
-                lineWidth: (context) => {
-                    // Make the line at y=0 thicker
-                    return context.tick.value === 0 ? 3 : 1;
-                }
+                color: (context) => {
+                    return context.tick.value === 0 ? 'rgb(200, 200, 200)' : 'rgba(200, 200, 200, 0.1)';
+                },
+                lineWidth: 1
             }
         }
     }
@@ -129,7 +128,7 @@ const options: ChartOptions<'line'> = {
 
 const StatusLineChart: React.FC = () => {
     return (
-        <div className='h-[163px] ml-[-37px] p-0 pr-7'>
+        <div className='h-[160px] ml-[-37px] p-0 pr-7'>
             <Line data={data} options={options} />
         </div>
     );

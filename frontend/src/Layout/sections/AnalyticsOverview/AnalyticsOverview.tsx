@@ -89,14 +89,14 @@ export const AnalyticsOverview = (): JSX.Element => {
       {/* Scrollable container for everything except navigation tabs */}
       <div className="overflow-y-auto">
         {/* Header */}
-        <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-[22px] px-[15px] sm:px-[30px] gap-4 sm:gap-0">
-          <h1 className="font-medium text-white text-xl sm:text-[23.2px] tracking-[0] leading-8">
+        <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-[22px] px-[15px] sm:pl-[30px] sm:pr-[23px] gap-4 sm:gap-0">
+          <h1 className="font-roboto font-normal text-white text-xl sm:text-[23.2px] tracking-[0] leading-8">
             Channel analytics
           </h1>
           <Link to="/admin">
             <Button
               variant="ghost"
-              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto font-normal"
+              className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto font-normal mt-[-2px] mb-1"
             >
               Advanced mode
             </Button>
@@ -106,10 +106,10 @@ export const AnalyticsOverview = (): JSX.Element => {
 
       {/* Navigation Tabs - Sticky */}
       <div className="w-full bg-[#282828] border-b border-[#ffffff1a] sticky top-16 z-10">
-        <div className="relative w-full px-4 sm:px-[30px]">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center h-auto sm:h-12 mt-[21px] gap-4 sm:gap-0 pb-4 sm:pb-0">
+        <div className="relative w-full px-4 sm:pl-[30px] sm:pr-[32px]">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center h-auto sm:h-12 mt-[18px] gap-4 sm:gap-0 pb-4 sm:pb-0">
             {/* Tabs */}
-            <div className="flex space-x-6 sm:space-x-10 overflow-x-auto w-full sm:w-auto">
+            <div className="flex space-x-6 sm:space-x-[41px] overflow-x-auto w-full sm:w-auto">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab;
                 return (
@@ -120,7 +120,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   >
                     <div className="h-12 flex items-center">
                       <span
-                        className={`font-medium text-sm sm:text-[15px] leading-6 whitespace-nowrap transition-colors duration-200
+                        className={`font-normal text-sm sm:text-[15px] leading-6 whitespace-nowrap transition-colors duration-200
                         ${isActive ? "text-white" : "text-[#aaaaaa] group-hover:text-white"}`}
                       >
                         {tab}
@@ -135,7 +135,7 @@ export const AnalyticsOverview = (): JSX.Element => {
             </div>
 
             {/* Date Select */}
-            <div className="ml-0 sm:ml-auto flex items-center w-full sm:w-auto mt-[-20px]">
+            <div className="ml-0 sm:ml-auto flex items-center w-full sm:w-auto mt-[-22px]">
               <DatePicker date={date} setDate={setDate} />
             </div>
           </div>
@@ -150,7 +150,7 @@ export const AnalyticsOverview = (): JSX.Element => {
           {/* Left Column */}
           <div className="flex-1 p-3 lg:p-3">
             {/* Performance Summary */}
-            <div className="mb-6 lg:mb-[38px] text-center font-roboto px-2">
+            <div className="mb-6 lg:mb-[40px] text-center font-roboto px-2">
               <h2 className="font-bold text-white text-xl sm:text-2xl lg:text-[28px] tracking-[-0.34px] leading-8 lg:leading-10 mt-[18px] mb-[17px]">
                 {(() => {
                   const value = Number(statTabs[0].value ?? 0);
@@ -250,7 +250,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <StatusLineChart />
               </div>
 
-              <div className="px-4 sm:px-6 pt-0 pb-4 mt-6">
+              <div className="px-4 sm:px-6 pt-0 pb-6 mt-[26px]">
                 <Button
                   variant="ghost"
                   className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9"
@@ -277,7 +277,7 @@ export const AnalyticsOverview = (): JSX.Element => {
               <div className="px-4">
                 <Separator className="bg-[#ffffff1a]" />
               </div>
-              <CardContent className="pt-[13px] pb-3 px-4 space-y-3">
+              <CardContent className="pt-[13px] pb-[17px] px-4 space-y-3">
                 <div>
                   <h3 className="text-white text-lg font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
                   <p className="text-[#aaaaaa] text-[13px] mb-[10px]">Subscribers</p>
@@ -300,7 +300,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   {/* Mini chart */}
                   <div className="text-white w-full mb-8">
                     <MiniBarChart data={mockData} />
-                    <div className="flex justify-between text-xs text-gray-400 mb-1 mt-[-1px]">
+                    <div className="flex justify-between text-xs text-gray-400 mt-2">
                       <span>-48h</span>
                       <span>Now</span>
                     </div>
@@ -308,7 +308,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center mb-5">
+                  <div className="flex justify-between items-center mb-5 mt-[-8px]">
                     <span className="text-[#aaaaaa] text-xs">Top content</span>
                     <span className="text-[#aaaaaa] text-xs">Views</span>
                   </div>

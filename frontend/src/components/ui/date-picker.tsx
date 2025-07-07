@@ -29,15 +29,15 @@ export function DatePicker({
     return (
         <Popover>
             <PopoverTrigger asChild>
-                <div className={cn("w-[220px] h-14 bg-[#ffffff01] cursor-pointer", className)}>
+                <div className={cn("w-[222px] h-14 bg-[#ffffff01] cursor-pointer", className)}>
                     <div className="flex flex-col h-full justify-center">
                         <div className="text-[#aaaaaa] text-xs tracking-[0.13px] leading-4">
                             {dateRangeText}
                         </div>
-                        <div className="text-white text-[15px] tracking-[0] leading-6 flex items-center justify-between">
+                        <div className="text-white font-roboto font-normal text-[15px] tracking-[0] leading-6 flex items-center justify-between">
                             {label}
                             <img
-                                className="ml-2 mt-[-10px] w-[13px] h-[7px]"
+                                className="ml-0 mt-[-16px]"
                                 alt="Dropdown arrow"
                                 src="./icon-dropdown.svg"
                             />
