@@ -16,7 +16,7 @@ export const Header = ({ onMenuClick }: HeaderProps): JSX.Element => {
     <div className="w-full h-16 bg-[#282828] shadow-[0_2px_4px_0_rgba(0,0,0,0.3)] z-50 fixed top-0 left-0">
       <header className="w-full h-16 flex items-center justify-between px-2 sm:pl-4 sm:pr-6">
         {/* Left section with menu and logo */}
-        <div className="flex items-center ml-[-3px] mt-[-2px]">
+        <div className="flex items-center ml-[-1px] mt-[-2px]">
           {/* Menu button */}
           <div
             className="w-11 h-11 rounded-[22px] flex items-center justify-center mr-2 sm:mr-4 cursor-pointer hover:bg-[#ffffff1a] transition-colors"
@@ -44,11 +44,11 @@ export const Header = ({ onMenuClick }: HeaderProps): JSX.Element => {
         {/* Search bar - responsive */}
         <div className="flex-1 max-w-[608px] ml-12 hidden sm:block">
           <div className="relative w-full h-[42px] rounded-[20px]">
-            <div className="absolute left-[15px] top-2 z-10 w-6 h-6 flex items-center justify-center">
+            <div className="absolute left-4 top-2 z-10 w-6 h-6 flex items-center justify-center">
               <img src="./icon-search.svg" className="w-[19px] h-[19px]" />
             </div>
             <Input
-              className="w-full h-10 bg-[#161616] rounded-[20px] pl-14 text-[15px] text-[#aaaaaa] font-roboto font-extralight border-none placeholder-white placeholder-opacity-100 placeholder:tracking-wider"
+              className="w-full h-10 bg-[#161616] rounded-[20px] pl-[57px] text-[15px] text-white font-roboto font-extralight border-none placeholder-[#dddddd] placeholder:text-[14px] placeholder:tracking-wider"
               placeholder="Search across your channel"
             />
           </div>

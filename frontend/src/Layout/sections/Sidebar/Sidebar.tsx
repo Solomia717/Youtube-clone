@@ -60,11 +60,11 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
               src="./profile-avatar.jpg"
             />
           </div>
-          <div className="mt-[14px] ml-[-4px] text-center">
+          <div className="mt-[14px] ml-[-2px] text-center">
             <div className="font-roboto font-medium text-white text-[15px] tracking-[0] leading-6">
               Your channel
             </div>
-            <div className="font-roboto font-normal text-[#aaaaaa] text-xs tracking-[0.13px] leading-4 mt-[2px]">
+            <div className="font-roboto font-normal text-[#868586] text-xs tracking-[0.13px] leading-4 mt-[2px]">
               1nterCartel
             </div>
           </div>
@@ -72,7 +72,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
 
         {/* Navigation menu */}
         <ScrollArea className="h-[calc(100vh-385px)]">
-          <div className="px-[9px] py-0 border-b">
+          <div className="px-3 py-0">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -86,7 +86,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                   }
                 }}
               >
-                <div className="w-6 h-6 ml-3 relative flex items-center justify-center">
+                <div className="w-6 h-6 ml-[11px] relative flex items-center justify-center">
                   <img
                     alt={item.name}
                     src={item.icon}
@@ -94,7 +94,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                 </div>
                 <div className="ml-6 overflow-hidden">
                   <div
-                    className={`font-roboto ${index === selectedMenu ? "font-normal" : "font-light"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
+                    className={`font-roboto1 ${index === selectedMenu ? "font-medium" : "font-normal"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
                   >
                     {item.name}
                   </div>
@@ -107,20 +107,20 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
         {/* Footer section */}
         <div className="w-full mt-auto">
           <Separator className="w-full bg-[#ffffff1a]" />
-          <div className="px-[9px] py-2">
+          <div className="px-3 py-2">
             {footerItems.map((item, index) => (
               <div
                 key={index}
                 className="w-[231px] h-12 rounded-lg flex items-center cursor-pointer hover:bg-[#2a2a2a] transition-colors duration-200"
               >
-                <div className="w-6 h-6 ml-3 relative flex items-center justify-center">
+                <div className="w-6 h-6 ml-[11px] relative flex items-center justify-center">
                   <img
                     alt={item.name}
                     src={item.icon}
                   />
                 </div>
                 <div className="ml-6 overflow-hidden">
-                  <div className="font-roboto font-light text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
+                  <div className="font-roboto1 font-normal text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
                     {item.name}
                   </div>
                 </div>

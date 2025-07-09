@@ -5,11 +5,11 @@ interface MiniBarChartProps {
     barColor?: string;
 }
 
-const MiniBarChart: React.FC<MiniBarChartProps> = ({ data, barColor = 'rgb(0, 200, 255)' }) => {
+const MiniBarChart: React.FC<MiniBarChartProps> = ({ data, barColor = '#44b4d8' }) => {
     const max = Math.max(...data);
 
     return (
-        <div className="flex items-end h-[35px] px-0 gap-[1px]">
+        <div className="flex items-end h-[35px] px-0 gap-[2px]">
             {data.map((value, index) => {
                 const height = (value / max) * 100;
                 return (

@@ -49,15 +49,32 @@ module.exports = {
       fontFamily: {
         sans: [
           'Roboto',
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
+          '"Segoe UI"',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'sans-serif',
           '"Apple Color Emoji"',
           '"Segoe UI Emoji"',
           '"Segoe UI Symbol"',
           '"Noto Color Emoji"',
         ],
         roboto: ['Roboto', 'sans-serif'],
+        robotoCustom: ['"RobotoCustom"', 'sans-serif'],
+        roboto1: ['Roboto1', 'sans-serif'],
+        youtube: ['"YouTube Sans"', 'sans-serif'],
+        segoe: [
+          '"Segoe UI"',
+          'Tahoma',
+          'Geneva',
+          'Verdana',
+          'sans-serif',
+        ],
+        source: [
+          '"Source Sans 3"',
+          'sans-serif',
+        ],
       },
       keyframes: {
         "accordion-down": {

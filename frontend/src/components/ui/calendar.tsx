@@ -33,7 +33,7 @@ function Calendar({
                 table: "w-full border-collapse table-fixed",
                 head_row: "",
                 head_cell:
-                    "text-[#aaaaaa] rounded-md w-9 h-9 font-normal text-[0.8rem] text-center",
+                    "text-[#868586] rounded-md w-9 h-9 font-normal text-[0.8rem] text-center",
                 row: "",
                 cell:
                     "h-9 w-9 text-center text-sm p-0 relative [&:has([aria-selected])]:bg-[#ffffff1a] first:[&:has([aria-selected])]:rounded-l-md last:[&:has([aria-selected])]:rounded-r-md focus-within:relative focus-within:z-20",
@@ -44,8 +44,8 @@ function Calendar({
                 day_selected:
                     "bg-[#ffffff1a] text-white hover:bg-[#ffffff33] hover:text-white focus:bg-[#ffffff33] focus:text-white",
                 day_today: "bg-[#ffffff1a] text-white",
-                day_outside: "text-[#aaaaaa] opacity-50",
-                day_disabled: "text-[#aaaaaa] opacity-50",
+                day_outside: "text-[#868586] opacity-50",
+                day_disabled: "text-[#868586] opacity-50",
                 day_range_middle: "aria-selected:bg-[#ffffff1a] aria-selected:text-white",
                 day_hidden: "invisible",
                 ...classNames,
