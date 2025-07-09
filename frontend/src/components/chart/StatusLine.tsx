@@ -51,11 +51,11 @@ const data: ChartData<'line'> = {
             label: 'Views',
             data: dataValues,
             fill: true,
-            borderColor: 'rgb(0, 221, 255)',
-            backgroundColor: 'rgba(40, 47, 51,0.8)',
+            borderColor: '#42aace',
+            backgroundColor: 'rgba(45, 55, 61, 0.8)',
             tension: 0,
             pointRadius: 0,
-            borderWidth: 1.5
+            borderWidth: 2
         }
     ]
 };
