@@ -154,7 +154,7 @@ const StatusLineChart: React.FC<StatusLineChartProps> = ({ date }) => {
                 data: dataValues.slice(-labels.length), // align data length with labels length
                 fill: true,
                 borderColor: '#42aace',
-                backgroundColor: 'rgba(45, 55, 61, 0.8)',
+                backgroundColor: 'rgba(40, 49, 54, 0.8)',
                 tension: 0,
                 pointRadius: 0,
                 borderWidth: 2,
