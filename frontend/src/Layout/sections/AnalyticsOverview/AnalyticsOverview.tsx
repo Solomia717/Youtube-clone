@@ -17,7 +17,7 @@ const apiUrl = import.meta.env.VITE_API_URL
 // Data for realtime top content
 const realtimeTopContent = [
   {
-    title: "Approaching girls in Vietnum 868586868586868586868586AAAA",
+    title: "Approaching girls in Vietnum AAAAAAAAAAAAAAAAAAAAAAAAAAAA",
     views: "8,143",
     thumbnail: "./content.jpg",
   },
@@ -120,7 +120,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                     <div className="h-12 flex items-center">
                       <span
                         className={`font-roboto font-medium text-sm sm:text-[15px] leading-6 whitespace-nowrap transition-colors duration-200
-                        ${isActive ? "text-white" : "text-[#868586] group-hover:text-white"}`}
+                        ${isActive ? "text-white" : "text-[#AAAAAA] group-hover:text-white"}`}
                       >
                         {tab}
                       </span>
@@ -170,7 +170,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   );
                 })()}
               </h2>
-              <p className="font-robotoCustom text-[#868586] text-sm lg:text-[14.8px] tracking-[0] leading-6 mt-[-1px] mb-[2px]">
+              <p className="font-robotoCustom text-[#AAAAAA] text-sm lg:text-[14.8px] tracking-[0] leading-6 mt-[-1px] mb-[2px]">
                 Your channel got {statTabs[0].value.toLocaleString('en-US')} views, {statTabs[0].sign ? 'more' : 'less'} than the 5,600–{(values?.viewsdiff ?? 0).toLocaleString('en-US')} it
                 usually gets in 28 days
               </p>
@@ -192,7 +192,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                     ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
                     ${i < statTabs.length - 1 ? "border-b sm:border-b-0 sm:border-r border-[#ffffff1a]" : ""}`}
                     >
-                      <p className="text-[#868586] text-xs tracking-[0.13px] leading-4 mt-[2px] mb-[3px]">
+                      <p className="text-[#AAAAAA] text-xs tracking-[0.13px] leading-4 mt-[2px] mb-[3px]">
                         {tab.label}
                       </p>
                       <div className="flex items-center justify-center mt-[2px] mb-[-2px]">
@@ -209,7 +209,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                           alt="indicator"
                         />
                       </div>
-                      <p className="text-[#868586] text-xs font-roboto1 italic tracking-[0.13px] leading-4 mt-[8px] mb-[-2px]">
+                      <p className="text-[#AAAAAA] text-xs font-roboto1 italic tracking-[0.13px] leading-4 mt-[8px] mb-[-2px]">
                         {(() => {
                           const diff = isNaN(Number(tab.diff)) || tab.diff === '' ? 0 : Number(tab.diff);
                           const isLarge = diff > 1000;
@@ -270,7 +270,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <CardTitle className="font-roboto font-normal text-white text-lg lg:text-[18px] tracking-[0.007rem]">Realtime</CardTitle>
                 <div className="flex items-center pb-[10px]" style={{ marginTop: '-2px' }}>
                   <div className="w-2 h-2 bg-[#44b1d6] rounded mr-1"></div>
-                  <span className="font-normal text-[#868586] text-[13px] mt-[1px] mb-[-1px]">
+                  <span className="font-normal text-[#AAAAAA] text-[13px] mt-[1px] mb-[-1px]">
                     Updating live
                   </span>
                 </div>
@@ -281,7 +281,7 @@ export const AnalyticsOverview = (): JSX.Element => {
               <CardContent className="pt-[14px] pb-[17px] px-4 space-y-3">
                 <div>
                   <h3 className="text-white text-lg font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
-                  <p className="text-[#868586] text-[13px] mt-[-1px] mb-[11px]">Subscribers</p>
+                  <p className="text-[#AAAAAA] text-[13px] mt-[-1px] mb-[11px]">Subscribers</p>
                   <Button
                     variant="ghost"
                     className="bg-[#ffffff1a] rounded-[18px] text-white text-sm h-9 w-full sm:w-auto"
@@ -294,14 +294,14 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                 <div className="pt-[2px]">
                   <h3 className="text-white text-lg font-medium">{values?.last48?.toLocaleString('en-US')}</h3>
-                  <p className="text-[#868586] text-[13px] mt-[-2px] mb-4">
+                  <p className="text-[#AAAAAA] text-[13px] mt-[-2px] mb-4">
                     Views · Last 48 hours
                   </p>
 
                   {/* Mini chart */}
                   <div className="text-white w-full mb-8">
                     <MiniBarChart data={mockData} />
-                    <div className="font-roboto flex justify-between text-xs text-[#868586] mt-2">
+                    <div className="font-roboto flex justify-between text-xs text-[#AAAAAA] mt-2">
                       <span>-48h</span>
                       <span>Now</span>
                     </div>
@@ -310,8 +310,8 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                 <div>
                   <div className="flex justify-between items-center mb-[21px] mt-[-9px]">
-                    <span className="text-[#868586] text-xs">Top content</span>
-                    <span className="text-[#868586] text-xs">Views</span>
+                    <span className="text-[#AAAAAA] text-xs">Top content</span>
+                    <span className="text-[#AAAAAA] text-xs">Views</span>
                   </div>
 
                   {realtimeTopContent.map((item, index) => (

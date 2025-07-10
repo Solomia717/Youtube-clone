@@ -29,7 +29,7 @@ export function DatePicker({
             <PopoverTrigger asChild>
                 <div className={cn("w-[222px] h-14 bg-[#ffffff01] cursor-pointer", className)}>
                     <div className="flex flex-col h-full justify-center">
-                        <div className="font-roboto font-medium text-[#868586] text-[12px] tracking-[0.13px] leading-4 mt-[-1.5px]">
+                        <div className="font-roboto font-medium text-[#AAAAAA] text-[12px] tracking-[0.13px] leading-4 mt-[-1.5px]">
                             {dateRangeText}
                         </div>
                         <div className="text-white font-roboto font-normal text-[15px] tracking-[0] leading-6 flex items-center justify-between">
