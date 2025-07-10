@@ -64,7 +64,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
             <div className="font-roboto font-medium text-white text-[15px] tracking-[0] leading-6">
               Your channel
             </div>
-            <div className="font-roboto font-normal text-[#868586] text-xs tracking-[0.13px] leading-4 mt-[2px]">
+            <div className="font-roboto font-normal text-[#AAAAAA] text-xs tracking-[0.13px] leading-4 mt-[2px]">
               1nterCartel
             </div>
           </div>

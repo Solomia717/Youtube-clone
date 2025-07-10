@@ -77,7 +77,7 @@ const StatusLineChart: React.FC<StatusLineChartProps> = ({ date }) => {
             x: {
                 offset: false,
                 ticks: {
-                    color: '#868586',
+                    color: '#AAAAAA',
                     callback: function (value, index, ticks) {
                         console.log(index)
                         const self = this as any;
@@ -167,7 +167,7 @@ const StatusLineChart: React.FC<StatusLineChartProps> = ({ date }) => {
         <div className='relative h-[160px] ml-[-42px] p-0 pr-6'>
             <Line data={data} options={options} />
             <div className="absolute top-0 right-[24px] w-[69px] h-full bg-[#282828] pointer-events-none z-10" />
-            <div className="absolute right-[44px] top-[14px] flex flex-col z-10 text-[12px] text-[#868586] font-roboto text-xs space-y-[22px]">
+            <div className="absolute right-[44px] top-[14px] flex flex-col z-10 text-[12px] text-[#AAAAAA] font-roboto text-xs space-y-[22px]">
                 <span>15.0K</span>
                 <span>10.0K</span>
                 <span>5.0K</span>
