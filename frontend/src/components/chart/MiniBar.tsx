@@ -5,7 +5,7 @@ interface MiniBarChartProps {
     barColor?: string;
 }
 
-const MiniBarChart: React.FC<MiniBarChartProps> = ({ data, barColor = '#44b4d8' }) => {
+const MiniBarChart: React.FC<MiniBarChartProps> = ({ data, barColor = '#41B4D9' }) => {
     const max = Math.max(...data);
 
     return (
