@@ -1,6 +1,4 @@
-import * as React from "react"
 import { format, subDays } from "date-fns"
-import { Calendar as CalendarIcon } from "lucide-react"
 
 import { cn } from "../../lib/utils"
 import { Button } from "./button"
@@ -23,7 +21,7 @@ export function DatePicker({
     label = "Last 28 days",
 }: DatePickerProps) {
     // Calculate the date range (28 days by default)
-    const startDate = subDays(date, 28)
+    const startDate = subDays(date, 27)
     const dateRangeText = `${format(startDate, "MMM d")} – ${format(date, "MMM d, yyyy")}`
 
     return (

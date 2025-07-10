@@ -18,17 +18,17 @@ const apiUrl = import.meta.env.VITE_API_URL
 const realtimeTopContent = [
   {
     title: "Approaching girls in Vietnum 868586868586868586868586AAAA",
-    views: "7,647",
+    views: "8,143",
     thumbnail: "./content.jpg",
   },
   {
     title: "Approaching girls in Vietnum BBBBBBBBBBBBBBBBBBBBBBBB",
-    views: "2,096",
+    views: "2,201",
     thumbnail: "./content.jpg",
   },
   {
     title: "Approaching girls in Vietnum CCCCCCCCCCCCCCC",
-    views: "1,299",
+    views: "1,382",
     thumbnail: "./content.jpg",
   },
 ];
@@ -56,7 +56,6 @@ export const AnalyticsOverview = (): JSX.Element => {
       .then((data) => {
         const result = data[0]
         setValues(result)
-        console.log(result)
         setStatTabs([
           {
             label: "Views",
@@ -193,11 +192,11 @@ export const AnalyticsOverview = (): JSX.Element => {
                     ${isActive ? "bg-[#282828]" : "bg-[#1f1f1f] hover:bg-[#2a2a2a]"}
                     ${i < statTabs.length - 1 ? "border-b sm:border-b-0 sm:border-r border-[#ffffff1a]" : ""}`}
                     >
-                      <p className="text-[#868586] text-xs tracking-[0.13px] leading-4 mt-[1px] mb-[3px]">
+                      <p className="text-[#868586] text-xs tracking-[0.13px] leading-4 mt-[2px] mb-[3px]">
                         {tab.label}
                       </p>
-                      <div className="flex items-center justify-center">
-                        <span className="font-robotoVF font-normal text-white text-xl sm:text-2xl tracking-[-0.29px] leading-8">
+                      <div className="flex items-center justify-center mt-[2px] mb-[-2px]">
+                        <span className="font-roboto font-normal text-white text-xl sm:text-2xl tracking-[-0.29px] leading-8">
                           {tab.label == 'Subscribers' ? '+' : ''}
                           {`${tab.value > 1000 ?
                             (Number(tab.value) / 1000).toFixed(1)
@@ -205,12 +204,12 @@ export const AnalyticsOverview = (): JSX.Element => {
                             }${tab.value > 1000 ? 'K' : ''}`}
                         </span>
                         <img
-                          className="w-[18px] h-[18px] ml-2"
+                          className="w-[20px] h-[20px] ml-[6px]"
                           src={tab.sign ? './status-rising.svg' : './status-down.svg'}
                           alt="indicator"
                         />
                       </div>
-                      <p className="text-[#868586] text-xs italic tracking-[0.13px] leading-4 mt-[6px]">
+                      <p className="text-[#868586] text-xs font-roboto1 italic tracking-[0.13px] leading-4 mt-[8px] mb-[-2px]">
                         {(() => {
                           const diff = isNaN(Number(tab.diff)) || tab.diff === '' ? 0 : Number(tab.diff);
                           const isLarge = diff > 1000;
@@ -248,8 +247,8 @@ export const AnalyticsOverview = (): JSX.Element => {
               </div>
 
               {/* Graph */}
-              <div className="mt-8">
-                <StatusLineChart />
+              <div className="mt-[34px]">
+                <StatusLineChart date={date} />
               </div>
 
               <div className="px-4 sm:px-6 pt-0 pb-6 mt-[25px]">
@@ -302,7 +301,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                   {/* Mini chart */}
                   <div className="text-white w-full mb-8">
                     <MiniBarChart data={mockData} />
-                    <div className="font-robotoVF flex justify-between text-xs text-[#868586] mt-2">
+                    <div className="font-roboto flex justify-between text-xs text-[#868586] mt-2">
                       <span>-48h</span>
                       <span>Now</span>
                     </div>
@@ -332,12 +331,12 @@ export const AnalyticsOverview = (): JSX.Element => {
                             />
                           </div>
                         </div>
-                        <span className="text-white text-xs sm:text-[13px] truncate font-robotoVF font-light tracking-[0.007rem]">
+                        <span className="text-white text-xs sm:text-[13px] truncate font-roboto1 font-normal">
                           <span className="sm:hidden">{item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}</span>
                           <span className="hidden sm:inline">{item.title.length > 25 ? `${item.title.slice(0, 25)}...` : item.title}</span>
                         </span>
                       </div>
-                      <span className="text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
+                      <span className="font-roboto font-normal text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
                         {item.views}
                       </span>
                     </div>
