@@ -63,6 +63,7 @@ module.exports = {
         roboto: ['Roboto', 'sans-serif'],
         robotoCustom: ['"RobotoCustom"', 'sans-serif'],
         roboto1: ['Roboto1', 'sans-serif'],
+        robotoThin: ['RobotoThin', 'sans-serif'],
         youtube: ['"YouTube Sans"', 'sans-serif'],
         segoe: [
           '"Segoe UI"',

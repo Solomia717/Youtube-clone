@@ -196,7 +196,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                         {tab.label}
                       </p>
                       <div className="flex items-center justify-center mt-[2px] mb-[-2px]">
-                        <span className="font-roboto font-normal text-white text-xl sm:text-2xl tracking-[-0.29px] leading-8">
+                        <span className="font-robotoThin font-normal text-white text-xl sm:text-2xl tracking-[-0.29px] leading-8">
                           {tab.label == 'Subscribers' ? '+' : ''}
                           {`${tab.value > 1000 ?
                             (Number(tab.value) / 1000).toFixed(1)
@@ -294,14 +294,14 @@ export const AnalyticsOverview = (): JSX.Element => {
 
                 <div className="pt-[2px]">
                   <h3 className="text-white text-lg font-medium">{values?.last48?.toLocaleString('en-US')}</h3>
-                  <p className="text-[#AAAAAA] text-[13px] mt-[-2px] mb-4">
+                  <p className="font-robotoThin text-[#AAAAAA] text-[13px] mt-[-2px] mb-4">
                     Views · Last 48 hours
                   </p>
 
                   {/* Mini chart */}
                   <div className="text-white w-full mb-8">
                     <MiniBarChart data={mockData} />
-                    <div className="font-roboto flex justify-between text-xs text-[#AAAAAA] mt-2">
+                    <div className="font-robotoThin flex justify-between text-xs text-[#AAAAAA] mt-2">
                       <span>-48h</span>
                       <span>Now</span>
                     </div>
@@ -309,11 +309,20 @@ export const AnalyticsOverview = (): JSX.Element => {
                 </div>
 
                 <div>
-                  <div className="flex justify-between items-center mb-[21px] mt-[-9px]">
-                    <span className="text-[#AAAAAA] text-xs">Top content</span>
-                    <span className="text-[#AAAAAA] text-xs">Views</span>
+                  <div className="flex justify-between items-center mb-[21px] mt-[-9px] font-robotoThin">
+                    <span
+                      className="text-[#AAAAAA] text-xs inline-block"
+                      style={{ transform: 'scaleY(0.9)' }}
+                    >
+                      Top content
+                    </span>
+                    <span
+                      className="text-[#AAAAAA] text-xs inline-block"
+                      style={{ transform: 'scaleY(0.9)' }}
+                    >
+                      Views
+                    </span>
                   </div>
-
                   {realtimeTopContent.map((item, index) => (
                     <div
                       key={index}
@@ -331,12 +340,12 @@ export const AnalyticsOverview = (): JSX.Element => {
                             />
                           </div>
                         </div>
-                        <span className="text-white text-xs sm:text-[13px] truncate font-roboto1 font-normal">
+                        <span className="text-white text-xs sm:text-[13px] truncate font-robotoThin font-normal">
                           <span className="sm:hidden">{item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}</span>
                           <span className="hidden sm:inline">{item.title.length > 25 ? `${item.title.slice(0, 25)}...` : item.title}</span>
                         </span>
                       </div>
-                      <span className="font-roboto font-normal text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
+                      <span className="font-robotoThin font-normal text-white text-xs sm:text-[13px] text-right ml-2 flex-shrink-0">
                         {item.views}
                       </span>
                     </div>
