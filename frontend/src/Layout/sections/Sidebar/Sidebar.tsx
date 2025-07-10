@@ -72,7 +72,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
 
         {/* Navigation menu */}
         <ScrollArea className="h-[calc(100vh-385px)]">
-          <div className="px-3 py-0">
+          <div className="pl-[14px] pr-3 py-0">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -107,7 +107,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
         {/* Footer section */}
         <div className="w-full mt-auto">
           <Separator className="w-full bg-[#ffffff1a]" />
-          <div className="px-3 py-2">
+          <div className="pl-[14px] pr-3 py-2">
             {footerItems.map((item, index) => (
               <div
                 key={index}
