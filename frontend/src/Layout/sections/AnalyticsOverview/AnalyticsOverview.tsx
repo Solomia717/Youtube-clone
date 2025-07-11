@@ -280,7 +280,7 @@ export const AnalyticsOverview = (): JSX.Element => {
               </div>
               <CardContent className="pt-[14px] pb-[17px] px-4 space-y-3">
                 <div>
-                  <h3 className="text-white text-lg font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
+                  <h3 className="text-white text-lg font-robotoThin font-medium">{values?.totalsubscribers?.toLocaleString('en-US')}</h3>
                   <p className="text-[#AAAAAA] text-[13px] mt-[-1px] mb-[11px]">Subscribers</p>
                   <Button
                     variant="ghost"
@@ -341,7 +341,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                           </div>
                         </div>
                         <span className="text-white text-xs sm:text-[13px] truncate font-robotoThin font-normal">
-                          <span className="sm:hidden">{item.title.length > 15 ? `${item.title.slice(0, 15)}...` : item.title}</span>
+                          <span className="sm:hidden">{item.title.length > 30 ? `${item.title.slice(0, 30)}...` : item.title}</span>
                           <span className="hidden sm:inline">{item.title.length > 25 ? `${item.title.slice(0, 25)}...` : item.title}</span>
                         </span>
                       </div>
