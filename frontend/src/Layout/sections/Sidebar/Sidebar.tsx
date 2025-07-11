@@ -72,7 +72,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
 
         {/* Navigation menu */}
         <ScrollArea className="h-[calc(100vh-385px)]">
-          <div className="pl-[14px] pr-3 py-0">
+          <div className="pl-[13px] pr-3 py-0">
             {menuItems.map((item, index) => (
               <div
                 key={index}
@@ -94,7 +94,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                 </div>
                 <div className="ml-6 overflow-hidden">
                   <div
-                    className={`font-roboto1 ${index === selectedMenu ? "font-medium" : "font-normal"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
+                    className={`font-robotoThin ${index === selectedMenu ? "font-medium" : "font-normal"} text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap`}
                   >
                     {item.name}
                   </div>
@@ -107,7 +107,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
         {/* Footer section */}
         <div className="w-full mt-auto">
           <Separator className="w-full bg-[#ffffff1a]" />
-          <div className="pl-[14px] pr-3 py-2">
+          <div className="pl-[13px] pr-3 py-2">
             {footerItems.map((item, index) => (
               <div
                 key={index}
@@ -120,7 +120,7 @@ export const Sidebar = ({ isOpen, onClose }: SidebarProps): JSX.Element => {
                   />
                 </div>
                 <div className="ml-6 overflow-hidden">
-                  <div className="font-roboto1 font-normal text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
+                  <div className="font-robotoThin font-normal text-white text-[15px] tracking-[0] leading-6 whitespace-nowrap">
                     {item.name}
                   </div>
                 </div>

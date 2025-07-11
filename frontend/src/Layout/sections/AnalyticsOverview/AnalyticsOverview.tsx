@@ -89,7 +89,7 @@ export const AnalyticsOverview = (): JSX.Element => {
       <div className="overflow-y-auto">
         {/* Header */}
         <div className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center pt-[16px] pb-[0px] px-[15px] sm:pl-[32px] sm:pr-[23px] gap-4 sm:gap-0">
-          <h1 className="font-youtube font-semibold text-white text-[20px] sm:text-[25px] leading-8 tracking-normal">
+          <h1 className="font-youtube font-semibold text-white text-[20px] sm:text-[25px] leading-8 tracking-normal mt-[1px] mb-[-1px]">
             Channel analytics
           </h1>
           <Link to="/admin">
@@ -270,7 +270,7 @@ export const AnalyticsOverview = (): JSX.Element => {
                 <CardTitle className="font-roboto font-normal text-white text-lg lg:text-[18px] tracking-[0.007rem]">Realtime</CardTitle>
                 <div className="flex items-center pb-[10px]" style={{ marginTop: '-2px' }}>
                   <div className="w-2 h-2 bg-[#44b1d6] rounded mr-1"></div>
-                  <span className="font-normal text-[#AAAAAA] text-[13px] mt-[1px] mb-[-1px]">
+                  <span className="font-robotoThin font-normal text-[#AAAAAA] text-[13px] mt-[1px] mb-[-1px]">
                     Updating live
                   </span>
                 </div>
